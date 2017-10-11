@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import DeviceList from './components/DeviceList';
+import 'normalize.css';
+
+const devices=['coffe Machine', 'Alarm Clock', 'Television'];
 
 class App extends Component {
   render() {
@@ -13,6 +17,7 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
+        <DeviceList devices={devices} />
       </div>
     );
   }
