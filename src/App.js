@@ -4,9 +4,27 @@ import './App.css';
 import DeviceList from './components/DeviceList';
 import 'normalize.css';
 
-const devices=['coffe Machine', 'Alarm Clock', 'Television'];
-
 class App extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      devices:['coffe Machine', 'Alarm Clock', 'Television'],
+      inputText:''
+    }
+  }
+
+  clickHandler = (text) => () => {
+    this.setState({
+      devices: this.state.devices.concat([text]),
+      inputText: ""
+    })
+  }
+  
+  onChangeHandler = (event) => {
+    this.setState({inputText:event.target.value})
+  }
+
   render() {
     return (
       <div className="App">
@@ -17,7 +35,12 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
-        <DeviceList devices={devices} />
+        <input type="text" value={this.state.inputText} onChange={this.onChangeHandler}/>
+        <button onClick={this.clickHandler(this.state.inputText)}>
+        push
+        </button>
+        <DeviceList devices={this.state.devices} />
+        
       </div>
     );
   }

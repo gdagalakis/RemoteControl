@@ -4,13 +4,14 @@ import './style.css';
 
 class DeviceList extends Component{
   render() {
-    const dev=this.props.devices;
     return(       
       <div className="deviceList">
         <ul>
-          
-          {dev.map( function(item,index){
-            return <li key={index}>{item}</li>;
+          {this.props.devices.map( (item,index) => {
+            return (
+              <li key={index}>{item}</li>
+
+              );
             }
           ) }
         </ul>  

@@ -1,0 +1,14 @@
+14/10/17
+1) Do not add device when input is empty
+2) Add delete buttons to devices list
+3) Form for device add with more attributes(eg ip,description etc)
+4) Edit device attributes buttons
+5) View button with on/off change
+
+
+
+Libraries to add
+-eslint
+-react-Router
+-ramda
+-redux
