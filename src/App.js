@@ -14,12 +14,26 @@ class App extends Component {
     }
   }
 
-  clickHandler = (text) => () => {
-    this.setState({
-      devices: this.state.devices.concat([text]),
-      inputText: ""
-    })
+  delHandler = (index) => () =>{
+    this.state.devices.splice(index,1)
+    this.setState({devices: this.state.devices})
   }
+
+  editHandler= (index) => () =>{
+    this.setState({inputText: this.state.devices.splice(index,1)})
+  }
+
+  clickHandler = (text) => () => {
+    if (!this.state.inputText==""){
+      this.setState({
+        devices: this.state.devices.concat([text]),
+        inputText: ""
+      })
+    }else{
+      this.setState({inputText:"Input must not be empty!"})
+    }
+  }
+
   
   onChangeHandler = (event) => {
     this.setState({inputText:event.target.value})
@@ -39,9 +53,10 @@ class App extends Component {
         <button onClick={this.clickHandler(this.state.inputText)}>
         push
         </button>
-        <DeviceList devices={this.state.devices} />
-        
+        <DeviceList devices={this.state.devices} delHand={this.delHandler} editHand={this.editHandler} />
       </div>
+      
+
     );
   }
 }
