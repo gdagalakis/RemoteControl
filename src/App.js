@@ -9,6 +9,12 @@ import { findById } from './lib/utils'
 import 'normalize.css'
 import jsDevices from './assets/devices'
 //const urlParams = window.location.search;
+import NavBar from './components/NavBar'
+import Devices from './pages/Devices'
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+import Page from './components/Page'
+
+const Users = () => <h2>Users</h2>
 
 class App extends Component {
     constructor(props) {
@@ -16,30 +22,6 @@ class App extends Component {
         this.state = {
             devices: jsDevices,
             inputText: '',
-        }
-    }
-
-    deleteHandler = id => () => {
-        //this.state.devices.splice(index,1)
-        //this.setState({devices: this.state.devices})
-        // console.log(id)
-        this.setState({
-            devices: remove(
-                this.state.devices.findIndex(findById(id)),
-                1,
-                this.state.devices,
-            ),
-        })
-    }
-
-    clickHandler = text => () => {
-        if (!this.state.inputText == '') {
-            this.setState({
-                devices: this.state.devices.concat([text]),
-                inputText: '',
-            })
-        } else {
-            this.setState({ inputText: 'Input must not be empty!' })
         }
     }
 
@@ -60,33 +42,54 @@ class App extends Component {
         event.preventDefault()
     }
 
+    deleteHandler = id => {
+        //this.state.devices.splice(index,1)
+        //this.setState({devices: this.state.devices})
+        // console.log(id)
+        this.setState({
+            devices: remove(
+                this.state.devices.findIndex(findById(id)),
+                1,
+                this.state.devices,
+            ),
+        })
+    }
+
     render() {
         //console.log( urlParams.split("&"));
         return (
-            <div className="App">
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo" />
-                    <h1 className="App-title">Welcome to React</h1>
-                </header>
-                <p className="App-intro">
-                    To get started, edit <code>src/App.js</code> and save to
-                    reload.
-                </p>
-                <input
-                    type="text"
-                    value={this.state.inputText}
-                    onChange={this.onChangeHandler}
-                />
-                <button onClick={this.clickHandler(this.state.inputText)}>
-                    push
-                </button>
-                <Form onSubmit={this.onSubmit} />
-                <DeviceList
-                    devices={this.state.devices}
-                    onDelete={this.deleteHandler}
-                    onEdit={this.editHandler}
-                />
-            </div>
+            <Router>
+                <div className="App">
+                    <NavBar />
+                    <p className="App-intro">
+                        To get started, edit <code>src/App.js</code> and save to
+                        reload.
+                    </p>
+
+                    <Route
+                        path="/"
+                        exact
+                        component={() => (
+                            <Page title="HomePage">
+                                <Form onSubmit={this.onSubmit} />
+                            </Page>
+                        )}
+                    />
+
+                    <Route
+                        path="/devices/"
+                        component={() => (
+                            <Page title="Devices">
+                                <Devices
+                                    devices={this.state.devices}
+                                    onDelete={this.deleteHandler}
+                                />
+                            </Page>
+                        )}
+                    />
+                    <Route path="/users/" component={Users} />
+                </div>
+            </Router>
         )
     }
 }

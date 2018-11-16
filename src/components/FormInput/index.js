@@ -1,29 +1,21 @@
-import React, { Component } from 'react'
+import React from 'react'
 import './style.css'
 
-class FormInput extends Component {
-    constructor(props) {
-        super(props)
-        this.handleChange = this.handleChange.bind(this)
-    }
-
-    handleChange(ev) {
-        this.props.onChange(ev.target.value, this.props.name)
-    }
-
-    render() {
-        return (
-            <label className={this.props.className}>
-                {this.props.desc}
-                {': '}
-                <input
-                    value={this.props.value}
-                    type="text"
-                    onChange={this.handleChange}
-                />
-            </label>
-        )
-    }
+const handleChange = action => ev => {
+    action(ev.target.value)
 }
+
+const FormInput = ({ className, desc, value, onChange, name }) => (
+    <label className={className}>
+        {desc}
+        {': '}
+        <input
+            value={value}
+            type="text"
+            name={name}
+            onChange={handleChange(onChange)}
+        />
+    </label>
+)
 
 export default FormInput

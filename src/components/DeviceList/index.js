@@ -11,7 +11,7 @@ class DeviceList extends Component {
     }
 
     render() {
-        const { devices, onDelete, onEdit } = this.props
+        const { devices, onDelete } = this.props
         return (
             <div className="deviceList">
                 <ul>
@@ -19,7 +19,7 @@ class DeviceList extends Component {
                         <DeviceItem
                             key={index}
                             {...item}
-                            onDelete={onDelete(item.id)}
+                            onDelete={() => onDelete(item.id)}
                         />
                     ))}
                 </ul>

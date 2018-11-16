@@ -25,8 +25,14 @@ map, reduce , filter
 16/11/18
 Prettier eslint
 
+H/W
+16/11/18
++DeviceList -> emfanisi me column name ,ip & description
++allagi url query mesw react Router
++places form(nested to home - react router)
+??? local storage devices
 
-15/11/18
+15/11/18??
 
 pretier
 

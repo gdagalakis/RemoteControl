@@ -11,7 +11,7 @@ class Form extends Component {
         this.state = { form: obj }
     }
 
-    handleChange = (inputText, name) => {
+    handleChange = name => inputText => {
         const newform = {
             ...this.state.form,
             [name]: inputText,
@@ -36,20 +36,20 @@ class Form extends Component {
                     desc="Name"
                     name="name"
                     value={this.state.form.name || ''}
-                    onChange={this.handleChange}
+                    onChange={this.handleChange('name')}
                 />
                 <FormInput
                     desc="IP"
                     className="funny"
                     value={this.state.form.ip || ''}
                     name="ip"
-                    onChange={this.handleChange}
+                    onChange={this.handleChange('ip')}
                 />
                 <FormInput
                     desc="Description"
                     name="description"
                     value={this.state.form.description || ''}
-                    onChange={this.handleChange}
+                    onChange={this.handleChange('description')}
                 />
                 <input type="submit" value="Submit" />
             </form>
