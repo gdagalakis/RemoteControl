@@ -9,6 +9,27 @@ OK
 5) Edit device attributes buttons
 6) View button with on/off change
 
+15/11/18
+nick
+
+3. On submit add to a list and display list in the same page
+4. on submit Clear form (controlled/uncontrolled inputs)
+5. Change url location on every change
+6. Add default values to fields based on the url
+
+===================================================
+map, reduce , filter
+===================================================
+
+
+16/11/18
+Prettier eslint
+
+
+15/11/18
+
+pretier
+
 
 
 Libraries to add

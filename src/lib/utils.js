@@ -1,0 +1,1 @@
+export const findById = (id) => (item) => item.id == id

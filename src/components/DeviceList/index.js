@@ -1,27 +1,31 @@
-import React, { Component } from 'react';
-import './style.css';
+import React, { Component } from 'react'
+import './style.css'
+import DeviceItem from '../DeviceItem'
 //const devices=['coffe Machine', 'Alarm Clock', 'Television'];
 
-class DeviceList extends Component{
-  render() {
-    return(       
-      <div className="deviceList">
-        <ul>
-          {this.props.devices.map( (item,index) => {
-            return (
-              <li key={index}>{item}
-              <button onClick={this.props.delHand(index)}> del </button>
-              <button onClick={this.props.editHand(index)}> edit </button>
-              </li>
-              );
-            }
-          ) }
-        </ul>  
-      </div>
-    )
-  }
+class DeviceList extends Component {
+    componentWillUpdate(nextProps) {
+        if (nextProps.devices.length == 1) {
+            alert('one device left')
+        }
+    }
 
+    render() {
+        const { devices, onDelete, onEdit } = this.props
+        return (
+            <div className="deviceList">
+                <ul>
+                    {devices.map((item, index) => (
+                        <DeviceItem
+                            key={index}
+                            {...item}
+                            onDelete={onDelete(item.id)}
+                        />
+                    ))}
+                </ul>
+            </div>
+        )
+    }
 }
 
-
-export default DeviceList;
+export default DeviceList
