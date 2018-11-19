@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import logo from './logo.svg'
 import './App.css'
-import { remove } from 'ramda'
+import * as R from 'ramda'
 import DeviceList from './components/DeviceList'
 import Form from './components/Form'
 import { findById } from './lib/utils'
@@ -13,14 +13,18 @@ import NavBar from './components/NavBar'
 import Devices from './pages/Devices'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Page from './components/Page'
+import { guid } from './utils'
 
 const Users = () => <h2>Users</h2>
+
+const toggleActive = R.over(R.lensProp('active'), R.not)
 
 class App extends Component {
     constructor(props) {
         super(props)
+        const cachedDevices = localStorage.getItem('devices')
         this.state = {
-            devices: jsDevices,
+            devices: JSON.parse(cachedDevices),
             inputText: '',
         }
     }
@@ -29,9 +33,12 @@ class App extends Component {
         // debugger
         // console.log('submited')
         // console.log(item.name)
+        item.id = guid()
+        const newDevices = this.state.devices.concat([item])
         this.setState({
-            devices: this.state.devices.concat([item]),
+            devices: newDevices,
         })
+        localStorage.setItem('devices', JSON.stringify(newDevices))
     }
 
     onChangeHandler = event => {
@@ -42,17 +49,30 @@ class App extends Component {
         event.preventDefault()
     }
 
+    onChangeActive = id => {
+        const deviceFoundIndex = this.state.devices.findIndex(findById(id))
+        const newDevices = R.adjust(
+            toggleActive,
+            deviceFoundIndex,
+            this.state.devices,
+        )
+        this.setState({ devices: newDevices })
+        localStorage.setItem('devices', JSON.stringify(newDevices))
+    }
+
     deleteHandler = id => {
         //this.state.devices.splice(index,1)
         //this.setState({devices: this.state.devices})
         // console.log(id)
+        const newDevices = R.remove(
+            this.state.devices.findIndex(findById(id)),
+            1,
+            this.state.devices,
+        )
         this.setState({
-            devices: remove(
-                this.state.devices.findIndex(findById(id)),
-                1,
-                this.state.devices,
-            ),
+            devices: newDevices,
         })
+        localStorage.setItem('devices', JSON.stringify(newDevices))
     }
 
     render() {
@@ -83,6 +103,7 @@ class App extends Component {
                                 <Devices
                                     devices={this.state.devices}
                                     onDelete={this.deleteHandler}
+                                    onChangeActive={this.onChangeActive}
                                 />
                             </Page>
                         )}

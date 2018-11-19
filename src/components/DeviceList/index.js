@@ -11,15 +11,24 @@ class DeviceList extends Component {
     }
 
     render() {
-        const { devices, onDelete } = this.props
+        const { devices, onDelete, onChange } = this.props
         return (
             <div className="deviceList">
                 <ul>
+                    <li className="deviceitem header">
+                        <div className="itemID">ACTIVE ID</div>
+                        <div className="itemName">NAME</div>
+                        <div className="itemIP">IP</div>
+                        <div className="itemDescription">DESCRIPTION</div>
+                        <div className="itemActions">ACTIONS</div>
+                    </li>
                     {devices.map((item, index) => (
                         <DeviceItem
                             key={index}
+                            index={index + 1}
                             {...item}
                             onDelete={() => onDelete(item.id)}
+                            handleChange={() => onChange(item.id)}
                         />
                     ))}
                 </ul>

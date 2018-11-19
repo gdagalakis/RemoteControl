@@ -1,0 +1,36 @@
+.deviceitem {
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.deviceitem div {
+  border: 1px solid black;
+  padding: 10px;
+  margin-left: -1px;
+  margin-bottom: -1px;
+}
+
+.itemID {
+  width: var(--item-id-width);
+}
+
+.deviceitem .itemName {
+  width: var(--item-name-width);
+}
+
+.itemIP {
+  width: var(--item-ip-width);
+}
+
+.itemDescription {
+  width: var(--item-description-width);
+}
+
+.itemActions {
+  width: var(--item-actions-width);
+}
+
+.deviceitem div:first-child {
+  flex-grow: 0;
+}

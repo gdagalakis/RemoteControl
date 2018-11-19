@@ -1,8 +1,19 @@
+:root {
+  --item-id-width: 10%;
+  --item-name-width: 20%;
+  --item-ip-width: 15%;
+  --item-description-width: 40%;
+  --item-actions-width: 15%;
+}
 
 .deviceList {
   text-align: left;
 }
-.deviceList ul{
+.deviceList ul {
   padding: 2px;
-  list-style-type:none;
+  list-style-type: none;
+}
+
+.deviceList .header {
+  font-weight: bold;
 }

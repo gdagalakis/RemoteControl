@@ -1,6 +1,5 @@
 import React from 'react'
 import './style.css'
-
 const handleChange = action => ev => {
     action(ev.target.value)
 }
