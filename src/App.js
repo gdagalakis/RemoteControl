@@ -24,7 +24,7 @@ class App extends Component {
         super(props)
         const cachedDevices = localStorage.getItem('devices')
         this.state = {
-            devices: JSON.parse(cachedDevices),
+            devices: JSON.parse(cachedDevices) || [],
             inputText: '',
         }
     }
