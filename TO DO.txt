@@ -34,7 +34,12 @@ H/W
 16/11/18
 +DeviceList -> (me divs)emfanisi me column name ,ip & description , is active DONE
 +local storage devices
-+allagi url query mesw react Router(apo input) 
++allagi url query mesw react Router(apo input)
++ Add styled components lib
+  + change all css into js files (move global css into a createGlobalStyle Component and create styled components for every css rule necessary)
+  + We need theming in our app. We should have a dropdown in the header that we can choose dark/white theme options
+    Dark theme should make background of the whole page black and texts/borders white. 
+    White theme should be as it is now. (https://www.styled-components.com/docs/advanced#theming)
 +places form(nested to home - react router)
 ??? 
 
