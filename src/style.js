@@ -31,7 +31,3 @@ export const AppDiv = styled.div`
     color: ${props => props.theme.fg};
     background: ${props => props.theme.bg};
 `
-
-// Vanilla - #f1f2de background, #20211a font color, #53543f borders color
-// Darcula - #11110f background, #7093e0 font color, #d7ecef border color
-// Funny - #e53247 background, #4a81d3 font color, #71d34a border color

@@ -9,7 +9,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Page from './components/Page'
 import { guid } from './utils'
 import { GlobalStyle } from './globalStyle'
-import { AppDiv, VanillaTheme, selectThemeByName } from './style.js'
+import { AppDiv, selectThemeByName } from './style.js'
 import { ThemeProvider } from 'styled-components'
 
 const Users = () => <h2>Users</h2>
@@ -23,7 +23,7 @@ class App extends Component {
         this.state = {
             devices: JSON.parse(cachedDevices) || [],
             inputText: '',
-            curTheme: VanillaTheme,
+            curTheme: selectThemeByName,
         }
     }
 
@@ -79,8 +79,6 @@ class App extends Component {
     })
 
     changeTheme = theme => {
-        console.log(theme)
-        console.log(selectThemeByName(theme))
         this.setState({
             curTheme: selectThemeByName(theme),
         })
