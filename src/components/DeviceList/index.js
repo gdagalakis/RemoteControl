@@ -10,7 +10,7 @@ class DeviceList extends Component {
     }
 
     render() {
-        const { devices, onDelete, onChange, onSave } = this.props
+        const { devices, onDelete, onChangeActive, onSave } = this.props
         return (
             <div className="deviceList">
                 <ul>
@@ -27,7 +27,7 @@ class DeviceList extends Component {
                             index={index + 1}
                             {...item}
                             onDelete={() => onDelete(item.id)}
-                            handleChange={() => onChange(item.id)}
+                            handleChange={() => onChangeActive(item.id)}
                             saveChanges={onSave(item.id)}
                         />
                     ))}
