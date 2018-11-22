@@ -1,17 +1,8 @@
-import React, { Component } from 'react'
-import jsDevices from '../../assets/devices'
+import React from 'react'
 import DeviceList from '../../components/DeviceList'
-import { remove } from 'ramda'
-import { findById } from '../../lib/utils'
 
-const Devices = ({ devices, onDelete, onChangeActive }) => {
-    return (
-        <DeviceList
-            devices={devices}
-            onDelete={onDelete}
-            onChange={onChangeActive}
-        />
-    )
+const Devices = props => {
+    return <DeviceList {...props} />
 }
 
 export default Devices

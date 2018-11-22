@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import './style.css'
 import DeviceItem from '../DeviceItem'
-//const devices=['coffe Machine', 'Alarm Clock', 'Television'];
+import * as S from '../DeviceItem/style.js'
 
 class DeviceList extends Component {
     componentWillUpdate(nextProps) {
@@ -15,13 +14,13 @@ class DeviceList extends Component {
         return (
             <div className="deviceList">
                 <ul>
-                    <li className="deviceitem header">
-                        <div className="itemID">ACTIVE ID</div>
-                        <div className="itemName">NAME</div>
-                        <div className="itemIP">IP</div>
-                        <div className="itemDescription">DESCRIPTION</div>
-                        <div className="itemActions">ACTIONS</div>
-                    </li>
+                    <S.Wrapper isHeader>
+                        <S.IdItem>ACTIVE ID</S.IdItem>
+                        <S.ItemName>NAME</S.ItemName>
+                        <S.ItemIP>IP</S.ItemIP>
+                        <S.ItemDescription>DESCRIPTION</S.ItemDescription>
+                        <S.ItemActions>ACTIONS</S.ItemActions>
+                    </S.Wrapper>
                     {devices.map((item, index) => (
                         <DeviceItem
                             key={index}

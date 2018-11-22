@@ -1,10 +1,11 @@
 import React from 'react'
-import './style.css'
+//import './style.css'
 import { NavLink } from 'react-router-dom'
+import { NavWrapper } from './style.js'
 
-const NavBar = () => (
-    <nav className="nav" id="menu-outer">
-        <div className="table">
+const NavBar = ({ changeTheme }) => (
+    <NavWrapper>
+        <div>
             <ul>
                 <li>
                     <NavLink exact to="/" activeClassName="active">
@@ -22,8 +23,9 @@ const NavBar = () => (
                     </NavLink>
                 </li>
             </ul>
+            <input type="button" onClick={changeTheme} value="ChangeTheme" />
         </div>
-    </nav>
+    </NavWrapper>
 )
 
 export default NavBar

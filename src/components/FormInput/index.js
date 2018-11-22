@@ -1,11 +1,13 @@
 import React from 'react'
-import './style.css'
+//import './style.css'
+import { FormInputWrapper } from './style.js'
+
 const handleChange = action => ev => {
     action(ev.target.value)
 }
 
-const FormInput = ({ className, desc, value, onChange, name }) => (
-    <label className={className}>
+const FormInput = ({ isFunny, className, desc, value, onChange, name }) => (
+    <FormInputWrapper isFunny={isFunny} className={className}>
         {desc}
         {': '}
         <input
@@ -14,7 +16,7 @@ const FormInput = ({ className, desc, value, onChange, name }) => (
             name={name}
             onChange={handleChange(onChange)}
         />
-    </label>
+    </FormInputWrapper>
 )
 
 export default FormInput

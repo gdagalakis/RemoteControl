@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
-import './style.css'
 import FormInput from '../FormInput'
 import { urlToObject, objectToUrl } from '../../utils'
-
+import queryString from 'query-string'
+import { FormWrapper } from './style.js'
+import './style.js'
 class Form extends Component {
     constructor(props) {
         super(props)
-        const urlParams = window.location.search.slice(1)
-        const obj = urlToObject(urlParams)
+        const obj = queryString.parse(this.props.history.location.search)
         this.state = { form: obj }
     }
 
@@ -18,20 +18,20 @@ class Form extends Component {
         }
 
         this.setState({ form: newform })
-        window.history.pushState('page2', 'Title', '/?' + objectToUrl(newform))
-        //console.log(this.state);
+        this.props.history.push('/?' + queryString.stringify(newform))
     }
 
     handleSubmit = e => {
+        const { onSubmit, history } = this.props
         e.preventDefault()
-        this.props.onSubmit(this.state.form)
+        onSubmit(this.state.form)
         this.setState({ form: {} })
-        window.history.pushState('page2', 'Title', '/?' + objectToUrl({}))
+        history.push('')
     }
 
     render() {
         return (
-            <form id="myForm" onSubmit={this.handleSubmit}>
+            <FormWrapper id="myForm" onSubmit={this.handleSubmit}>
                 <FormInput
                     desc="Name"
                     name="name"
@@ -40,7 +40,7 @@ class Form extends Component {
                 />
                 <FormInput
                     desc="IP"
-                    className="funny"
+                    isFunny
                     value={this.state.form.ip || ''}
                     name="ip"
                     onChange={this.handleChange('ip')}
@@ -52,7 +52,7 @@ class Form extends Component {
                     onChange={this.handleChange('description')}
                 />
                 <input type="submit" value="Submit" />
-            </form>
+            </FormWrapper>
         )
     }
 }
