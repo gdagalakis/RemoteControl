@@ -35,8 +35,9 @@ export const NavWrapper = styled.nav`
         color: white;
     }
 
-    input {
+    select {
         position: absolute;
         right: 10px;
+        padding: 0;
     }
 `

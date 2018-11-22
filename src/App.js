@@ -9,7 +9,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Page from './components/Page'
 import { guid } from './utils'
 import { GlobalStyle } from './globalStyle'
-import { AppDiv, defaultTheme, invertTheme } from './style.js'
+import { AppDiv, VanillaTheme, selectThemeByName } from './style.js'
+import { ThemeProvider } from 'styled-components'
 
 const Users = () => <h2>Users</h2>
 const toggleActive = R.over(R.lensProp('active'), R.not)
@@ -22,7 +23,7 @@ class App extends Component {
         this.state = {
             devices: JSON.parse(cachedDevices) || [],
             inputText: '',
-            curTheme: defaultTheme,
+            curTheme: VanillaTheme,
         }
     }
 
@@ -77,9 +78,11 @@ class App extends Component {
         localStorage.setItem('devices', JSON.stringify(newDevices))
     })
 
-    changeTheme = () => {
+    changeTheme = theme => {
+        console.log(theme)
+        console.log(selectThemeByName(theme))
         this.setState({
-            curTheme: invertTheme(this.state.curTheme),
+            curTheme: selectThemeByName(theme),
         })
     }
 
@@ -87,39 +90,44 @@ class App extends Component {
         return (
             <div className="AppDiv">
                 <Router>
-                    <AppDiv theme={this.state.curTheme}>
-                        <GlobalStyle />
-                        <NavBar changeTheme={this.changeTheme} />
-                        <p className="App-intro">
-                            To get started, edit <code>src/App.js</code> and
-                            save to reload.
-                        </p>
+                    <ThemeProvider theme={this.state.curTheme}>
+                        <AppDiv>
+                            <GlobalStyle />
+                            <NavBar changeTheme={this.changeTheme} />
+                            <p className="App-intro">
+                                To get started, edit <code>src/App.js</code> and
+                                save to reload.
+                            </p>
 
-                        <Route
-                            path="/"
-                            exact
-                            component={props => (
-                                <Page title="HomePage">
-                                    <Form {...props} onSubmit={this.onSubmit} />
-                                </Page>
-                            )}
-                        />
+                            <Route
+                                path="/"
+                                exact
+                                component={props => (
+                                    <Page title="HomePage">
+                                        <Form
+                                            {...props}
+                                            onSubmit={this.onSubmit}
+                                        />
+                                    </Page>
+                                )}
+                            />
 
-                        <Route
-                            path="/devices/"
-                            component={() => (
-                                <Page title="Devices">
-                                    <Devices
-                                        devices={this.state.devices}
-                                        onDelete={this.deleteHandler}
-                                        onChangeActive={this.onChangeActive}
-                                        onSave={this.onSaveHandler}
-                                    />
-                                </Page>
-                            )}
-                        />
-                        <Route path="/users/" component={Users} />
-                    </AppDiv>
+                            <Route
+                                path="/devices/"
+                                component={() => (
+                                    <Page title="Devices">
+                                        <Devices
+                                            devices={this.state.devices}
+                                            onDelete={this.deleteHandler}
+                                            onChangeActive={this.onChangeActive}
+                                            onSave={this.onSaveHandler}
+                                        />
+                                    </Page>
+                                )}
+                            />
+                            <Route path="/users/" component={Users} />
+                        </AppDiv>
+                    </ThemeProvider>
                 </Router>
             </div>
         )

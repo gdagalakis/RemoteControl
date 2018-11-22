@@ -23,7 +23,11 @@ const NavBar = ({ changeTheme }) => (
                     </NavLink>
                 </li>
             </ul>
-            <input type="button" onClick={changeTheme} value="ChangeTheme" />
+            <select onChange={e => changeTheme(e.target.value)}>
+                <option value="VanillaTheme"> Vanilla</option>
+                <option value="DarculaTheme"> Darcula</option>
+                <option value="Funny"> Funny</option>
+            </select>
         </div>
     </NavWrapper>
 )
