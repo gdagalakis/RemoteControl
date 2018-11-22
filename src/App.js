@@ -11,6 +11,7 @@ import { guid } from './utils'
 import { GlobalStyle } from './globalStyle'
 import { AppDiv, selectThemeByName } from './style.js'
 import { ThemeProvider } from 'styled-components'
+import 'normalize.css'
 
 const Users = () => <h2>Users</h2>
 const toggleActive = R.over(R.lensProp('active'), R.not)

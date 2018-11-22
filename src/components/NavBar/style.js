@@ -16,7 +16,7 @@ export const NavWrapper = styled.nav`
         color: rgb(0, 140, 255);
         text-decoration: none;
         display: block;
-        padding: 10px 10px;
+        padding: 20px 10px;
     }
     a:hover {
         background-color: rgb(129, 226, 255);
@@ -34,10 +34,14 @@ export const NavWrapper = styled.nav`
         background-color: rgb(49, 187, 212);
         color: white;
     }
+`
+export const ThemeSelector = styled.div`
+    position: absolute;
+    right: 10px;
+    font-size: small;
+    width: 10%;
 
-    select {
-        position: absolute;
-        right: 10px;
-        padding: 0;
+    .theme_select__value-container {
+        height: 80%;
     }
 `
