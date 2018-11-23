@@ -6,13 +6,21 @@ const handleChange = action => ev => {
     action(ev.target.value)
 }
 
-const FormInput = ({ isFunny, className, desc, value, onChange, name }) => (
+const FormInput = ({
+    isFunny,
+    className,
+    desc,
+    value,
+    onChange,
+    name,
+    type,
+}) => (
     <FormInputWrapper isFunny={isFunny} className={className}>
         {desc}
         {': '}
         <input
             value={value}
-            type="text"
+            type={type || 'text'}
             name={name}
             onChange={handleChange(onChange)}
         />
