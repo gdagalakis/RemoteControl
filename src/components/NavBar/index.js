@@ -3,26 +3,19 @@ import React from 'react'
 import { NavLink } from 'react-router-dom'
 import { NavWrapper, ThemeSelector } from './style.js'
 import Select from 'react-select'
-
-const options = [
-    { value: 'VanillaTheme', label: 'Vanilla' },
-    { value: 'DarculaTheme', label: 'Darcula' },
-    { value: 'Funny', label: 'Funny' },
-]
+import { themes, defaultTheme } from '../../globalStyle.js'
 
 class NavBar extends React.Component {
-    changeTheme = this.props.changeTheme
-
-    handleChange = selectedOption => {
-        this.setState({ selectedOption })
-        this.changeTheme(selectedOption.value)
-    }
-
     constructor(props) {
         super(props)
         this.state = {
             selectedOption: null,
         }
+    }
+
+    handleChange = selectedOption => {
+        this.setState({ selectedOption })
+        this.props.changeTheme(selectedOption.value)
     }
 
     render() {
@@ -50,9 +43,10 @@ class NavBar extends React.Component {
                         <Select
                             className="select"
                             classNamePrefix="theme_select"
+                            defaultValue={defaultTheme}
                             value={this.selectedOption}
                             onChange={this.handleChange}
-                            options={options}
+                            options={themes}
                         />
                     </ThemeSelector>
                 </div>

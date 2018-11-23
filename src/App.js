@@ -8,8 +8,8 @@ import Devices from './pages/Devices'
 import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Page from './components/Page'
 import { guid } from './utils'
-import { GlobalStyle } from './globalStyle'
-import { AppDiv, selectThemeByName } from './style.js'
+import { GlobalStyle, defaultTheme } from './globalStyle'
+import { AppDiv } from './style.js'
 import { ThemeProvider } from 'styled-components'
 import 'normalize.css'
 
@@ -24,7 +24,7 @@ class App extends Component {
         this.state = {
             devices: JSON.parse(cachedDevices) || [],
             inputText: '',
-            curTheme: selectThemeByName,
+            curTheme: defaultTheme.value,
         }
     }
 
@@ -81,7 +81,7 @@ class App extends Component {
 
     changeTheme = theme => {
         this.setState({
-            curTheme: selectThemeByName(theme),
+            curTheme: theme,
         })
     }
 
