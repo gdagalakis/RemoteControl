@@ -1,4 +1,6 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import Select from 'react-select'
+
 export const NavWrapper = styled.nav`
     position: relative;
     ul {
@@ -16,7 +18,7 @@ export const NavWrapper = styled.nav`
         color: rgb(0, 140, 255);
         text-decoration: none;
         display: block;
-        padding: 10px 10px;
+        padding: 20px 10px;
     }
     a:hover {
         background-color: rgb(129, 226, 255);
@@ -34,9 +36,10 @@ export const NavWrapper = styled.nav`
         background-color: rgb(49, 187, 212);
         color: white;
     }
-
-    input {
-        position: absolute;
-        right: 10px;
-    }
+`
+export const ThemeSelector = styled(Select)`
+    position: absolute !important;
+    right: 10px;
+    font-size: small;
+    width: 10%;
 `

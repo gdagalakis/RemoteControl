@@ -8,7 +8,7 @@ export const Wrapper = styled.li`
     justify-content: flex-start;
 `
 export const Item = styled.div`
-    border: 1px solid ${props => props.theme.fg};
+    border: 1px solid ${props => props.theme.border};
     padding: 10px;
     margin-left: -1px;
     margin-bottom: -1px;

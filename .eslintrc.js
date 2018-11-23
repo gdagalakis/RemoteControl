@@ -20,5 +20,6 @@ module.exports = {
         semi: ['error', 'never'],
         'react/jsx-uses-react': 'error',
         'react/jsx-uses-vars': 'error',
+        'no-use-before-define': 'error',
     },
 }
