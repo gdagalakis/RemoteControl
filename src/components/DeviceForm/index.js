@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import FormInput from '../FormInput'
 import { FormWrapper } from './style.js'
 import './style.js'
-import { InteractWithHistory } from '../../lib/utils'
+import InteractWithHistory from '../../lib/InteractWithHistoryHOC'
 
 class DeviceForm extends Component {
     constructor(props) {
@@ -21,17 +21,17 @@ class DeviceForm extends Component {
     }
 
     handleSubmit = e => {
-        const { onSubmit } = this.props
+        const { onSubmit, clearQuery } = this.props
         e.preventDefault()
         onSubmit(this.state.form)
         this.setState({ form: {} })
-        this.props.updateQuery()
+        clearQuery()
     }
 
     render() {
         const { form } = this.state
         return (
-            <FormWrapper id="myForm" onSubmit={this.handleSubmit}>
+            <FormWrapper onSubmit={this.handleSubmit}>
                 <FormInput
                     desc="Name"
                     name="name"
