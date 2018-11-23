@@ -9,7 +9,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Page from './components/Page'
 import { guid } from './utils'
 import { GlobalStyle, defaultTheme } from './globalStyle'
-import { AppDiv, NavigationBar } from './style.js'
+import { AppDiv } from './style.js'
 import { ThemeProvider } from 'styled-components'
 import 'normalize.css'
 
