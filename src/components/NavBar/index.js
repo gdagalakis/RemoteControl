@@ -2,7 +2,6 @@ import React from 'react'
 //import './style.css'
 import { NavLink } from 'react-router-dom'
 import { NavWrapper, ThemeSelector } from './style.js'
-import Select from 'react-select'
 import { themes, defaultTheme } from '../../globalStyle.js'
 
 class NavBar extends React.Component {
@@ -39,16 +38,12 @@ class NavBar extends React.Component {
                             </NavLink>
                         </li>
                     </ul>
-                    <ThemeSelector>
-                        <Select
-                            className="select"
-                            classNamePrefix="theme_select"
-                            defaultValue={defaultTheme}
-                            value={this.selectedOption}
-                            onChange={this.handleChange}
-                            options={themes}
-                        />
-                    </ThemeSelector>
+                    <ThemeSelector
+                        defaultValue={defaultTheme}
+                        value={this.selectedOption}
+                        onChange={this.handleChange}
+                        options={themes}
+                    />
                 </div>
             </NavWrapper>
         )

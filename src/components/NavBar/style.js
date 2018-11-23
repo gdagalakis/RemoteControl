@@ -1,4 +1,6 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import Select from 'react-select'
+
 export const NavWrapper = styled.nav`
     position: relative;
     ul {
@@ -35,13 +37,9 @@ export const NavWrapper = styled.nav`
         color: white;
     }
 `
-export const ThemeSelector = styled.div`
-    position: absolute;
+export const ThemeSelector = styled(Select)`
+    position: absolute !important;
     right: 10px;
     font-size: small;
     width: 10%;
-
-    .theme_select__value-container {
-        height: 80%;
-    }
 `

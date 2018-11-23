@@ -9,7 +9,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Page from './components/Page'
 import { guid } from './utils'
 import { GlobalStyle, defaultTheme } from './globalStyle'
-import { AppDiv } from './style.js'
+import { AppDiv, NavigationBar } from './style.js'
 import { ThemeProvider } from 'styled-components'
 import 'normalize.css'
 
@@ -93,11 +93,6 @@ class App extends Component {
                         <AppDiv>
                             <GlobalStyle />
                             <NavBar changeTheme={this.changeTheme} />
-                            <p className="App-intro">
-                                To get started, edit <code>src/App.js</code> and
-                                save to reload.
-                            </p>
-
                             <Route
                                 path="/"
                                 exact

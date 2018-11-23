@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import NavBar from './components/NavBar'
 
 export const AppDiv = styled.div`
     text-align: center;
