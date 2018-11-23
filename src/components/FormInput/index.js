@@ -20,11 +20,15 @@ const FormInput = ({
         {': '}
         <input
             value={value}
-            type={type || 'text'}
+            type={type}
             name={name}
             onChange={handleChange(onChange)}
         />
     </FormInputWrapper>
 )
+
+FormInput.defaultProps = {
+    type: 'text',
+}
 
 export default FormInput
