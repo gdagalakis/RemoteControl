@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import FormInput from '../FormInput'
 import { FormWrapper } from './style.js'
 import './style.js'
-import InteractWithHistory from '../../lib/InteractWithHistoryHOC'
+import InteractWithHistory from 'lib/InteractWithHistoryHOC'
 
 class DeviceForm extends Component {
     constructor(props) {
