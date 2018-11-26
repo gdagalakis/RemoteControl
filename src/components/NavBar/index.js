@@ -33,8 +33,8 @@ class NavBar extends React.Component {
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to="/users/" activeClassName="active">
-                                Users
+                            <NavLink to="/addPlaces/" activeClassName="active">
+                                AddPlaces
                             </NavLink>
                         </li>
                     </ul>

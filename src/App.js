@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import * as R from 'ramda'
-import Form from './components/Form'
+import DeviceForm from './components/DeviceForm'
+import PlaceForm from './components/PlaceForm'
 import { findById } from './lib/utils'
 import 'normalize.css'
 import NavBar from './components/NavBar'
@@ -13,22 +14,29 @@ import { AppDiv } from './style.js'
 import { ThemeProvider } from 'styled-components'
 import 'normalize.css'
 
-const Users = () => <h2>Users</h2>
 const toggleActive = R.over(R.lensProp('active'), R.not)
+
+const normalizeItem = ({ name, description, posLat, posLong }) => ({
+    name,
+    description,
+    position: { posLat, posLong },
+})
 
 class App extends Component {
     constructor(props) {
         super(props)
 
         const cachedDevices = localStorage.getItem('devices')
+        const cachedPlaces = localStorage.getItem('places')
         this.state = {
             devices: JSON.parse(cachedDevices) || [],
+            places: JSON.parse(cachedPlaces) || [],
             inputText: '',
             curTheme: defaultTheme.value,
         }
     }
 
-    onSubmit = item => {
+    onDeviceFormSubmit = item => {
         item.id = guid()
         const newDevices = this.state.devices.concat([item])
         this.setState({
@@ -37,12 +45,18 @@ class App extends Component {
         localStorage.setItem('devices', JSON.stringify(newDevices))
     }
 
-    onChangeHandler = event => {
-        this.setState({ inputText: event.target.value })
+    onPlaceFormSubmit = item => {
+        item = normalizeItem(item)
+        item.id = guid()
+        const newPlaces = this.state.places.concat([item])
+        this.setState({
+            places: newPlaces,
+        })
+        localStorage.setItem('places', JSON.stringify(newPlaces))
     }
 
-    handleSubmit = event => {
-        event.preventDefault()
+    onChangeHandler = event => {
+        this.setState({ inputText: event.target.value })
     }
 
     onChangeActive = id => {
@@ -98,9 +112,9 @@ class App extends Component {
                                 exact
                                 component={props => (
                                     <Page title="HomePage">
-                                        <Form
+                                        <DeviceForm
                                             {...props}
-                                            onSubmit={this.onSubmit}
+                                            onSubmit={this.onDeviceFormSubmit}
                                         />
                                     </Page>
                                 )}
@@ -119,7 +133,17 @@ class App extends Component {
                                     </Page>
                                 )}
                             />
-                            <Route path="/users/" component={Users} />
+                            <Route
+                                path="/AddPlaces/"
+                                component={props => (
+                                    <Page title="AddPlace">
+                                        <PlaceForm
+                                            {...props}
+                                            onSubmit={this.onPlaceFormSubmit}
+                                        />
+                                    </Page>
+                                )}
+                            />
                         </AppDiv>
                     </ThemeProvider>
                 </Router>

@@ -1,54 +1,54 @@
 import React, { Component } from 'react'
 import FormInput from '../FormInput'
-import { urlToObject, objectToUrl } from '../../utils'
-import queryString from 'query-string'
 import { FormWrapper } from './style.js'
 import './style.js'
-class Form extends Component {
+import InteractWithHistory from 'lib/InteractWithHistoryHOC'
+
+class DeviceForm extends Component {
     constructor(props) {
         super(props)
-        const obj = queryString.parse(this.props.history.location.search)
-        this.state = { form: obj }
+        this.state = { form: props.query }
     }
 
     handleChange = name => inputText => {
-        const newform = {
+        const newForm = {
             ...this.state.form,
             [name]: inputText,
         }
 
-        this.setState({ form: newform })
-        this.props.history.push('/?' + queryString.stringify(newform))
+        this.setState({ form: newForm })
+        this.props.updateQuery(newForm)
     }
 
     handleSubmit = e => {
-        const { onSubmit, history } = this.props
+        const { onSubmit, clearQuery } = this.props
         e.preventDefault()
         onSubmit(this.state.form)
         this.setState({ form: {} })
-        history.push('')
+        clearQuery()
     }
 
     render() {
+        const { form } = this.state
         return (
-            <FormWrapper id="myForm" onSubmit={this.handleSubmit}>
+            <FormWrapper onSubmit={this.handleSubmit}>
                 <FormInput
                     desc="Name"
                     name="name"
-                    value={this.state.form.name || ''}
+                    value={form.name || ''}
                     onChange={this.handleChange('name')}
                 />
                 <FormInput
                     desc="IP"
                     isFunny
-                    value={this.state.form.ip || ''}
+                    value={form.ip || ''}
                     name="ip"
                     onChange={this.handleChange('ip')}
                 />
                 <FormInput
                     desc="Description"
                     name="description"
-                    value={this.state.form.description || ''}
+                    value={form.description || ''}
                     onChange={this.handleChange('description')}
                 />
                 <input type="submit" value="Submit" />
@@ -57,4 +57,4 @@ class Form extends Component {
     }
 }
 
-export default Form
+export default InteractWithHistory(DeviceForm)
