@@ -1,8 +1,12 @@
 import React from 'react'
 import DeviceList from '../../components/DeviceList'
-
-const Devices = props => {
-    return <DeviceList {...props} />
+import { DevicesContext } from 'lib/DevicesProvider'
+const Devices = () => {
+    return (
+        <DevicesContext.Consumer>
+            {value => <DeviceList {...value} />}
+        </DevicesContext.Consumer>
+    )
 }
 
 export default Devices
