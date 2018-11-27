@@ -3,11 +3,9 @@ import DeviceList from '../../components/DeviceList'
 import { DevicesContext } from 'lib/DevicesProvider'
 const Devices = () => {
     return (
-        <div>
-            <DevicesContext.Consumer>
-                {value => <DeviceList {...value} />}
-            </DevicesContext.Consumer>
-        </div>
+        <DevicesContext.Consumer>
+            {value => <DeviceList {...value} />}
+        </DevicesContext.Consumer>
     )
 }
 

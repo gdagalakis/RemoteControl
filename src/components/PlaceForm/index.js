@@ -31,8 +31,8 @@ class PlaceForm extends Component {
         const { form } = this.state
         return (
             <PlacesContext.Consumer>
-                {value => (
-                    <FormWrapper onSubmit={this.handleSubmit(value.onSubmit)}>
+                {({ onSubmit }) => (
+                    <FormWrapper onSubmit={this.handleSubmit(onSubmit)}>
                         <FormInput
                             desc="Name"
                             name="name"
