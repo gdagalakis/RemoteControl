@@ -20,9 +20,6 @@ export const NavWrapper = styled.nav`
         display: block;
         padding: 20px 10px;
     }
-    a:hover {
-        background-color: rgb(129, 226, 255);
-    }
 
     .disabled:active {
         pointer-events: none !important;
