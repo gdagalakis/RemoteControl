@@ -4,6 +4,8 @@ import { FormWrapper } from './style.js'
 import './style.js'
 import InteractWithHistory from 'lib/InteractWithHistoryHOC'
 import { DevicesContext } from 'lib/DevicesProvider'
+import PlaceSelector from 'components/PlaceSelector'
+import { PlacesContext } from 'lib/PlacesProvider'
 
 class DeviceForm extends Component {
     constructor(props) {
@@ -19,6 +21,20 @@ class DeviceForm extends Component {
 
         this.setState({ form: newForm })
         this.props.updateQuery(newForm)
+    }
+
+    handlePlaceChange = place => {
+        const newForm = {
+            ...this.state.form,
+            place,
+        }
+        this.setState({ form: newForm })
+        this.props.updateQuery({
+            name: this.state.form.name,
+            ip: this.state.form.ip,
+            description: this.state.form.description,
+            place: place.id,
+        })
     }
 
     handleSubmit = onSubmit => e => {
@@ -54,6 +70,16 @@ class DeviceForm extends Component {
                             value={form.description || ''}
                             onChange={this.handleChange('description')}
                         />
+                        <PlacesContext.Consumer>
+                            {({ places }) => (
+                                <PlaceSelector
+                                    desc="Place"
+                                    value={places}
+                                    placeId={this.props.query.place}
+                                    onChange={this.handlePlaceChange}
+                                />
+                            )}
+                        </PlacesContext.Consumer>
                         <input type="submit" value="Submit" />
                     </FormWrapper>
                 )}
