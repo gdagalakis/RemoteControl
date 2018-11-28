@@ -7,9 +7,9 @@ export const itemDescriptionWidth = '40%'
 export const itemActionsWidth = '15%'
 
 export const DevListWrapper = styled.div`
-    text-align: left;
+  text-align: left;
 `
 export const DevListUl = styled.ul`
-    padding: 2px;
-    list-style-type: none;
+  padding: 2px;
+  list-style-type: none;
 `

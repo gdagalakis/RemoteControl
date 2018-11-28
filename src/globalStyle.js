@@ -1,27 +1,27 @@
 import { createGlobalStyle } from 'styled-components'
 
 export const VanillaTheme = {
-    fg: '#20211a',
-    bg: '#f1f2de',
-    border: '#53543f',
+  fg: '#20211a',
+  bg: '#f1f2de',
+  border: '#53543f',
 }
 
 const DarculaTheme = {
-    fg: '#7093e0',
-    bg: '#11110f',
-    border: '#d7ecef',
+  fg: '#7093e0',
+  bg: '#11110f',
+  border: '#d7ecef',
 }
 
 const Funny = {
-    fg: '#4a81d3',
-    bg: '#e53247',
-    border: '#71d34a',
+  fg: '#4a81d3',
+  bg: '#e53247',
+  border: '#71d34a',
 }
 
 export const themes = [
-    { value: VanillaTheme, label: 'Vanilla' },
-    { value: DarculaTheme, label: 'Darcula' },
-    { value: Funny, label: 'Funny' },
+  { value: VanillaTheme, label: 'Vanilla' },
+  { value: DarculaTheme, label: 'Darcula' },
+  { value: Funny, label: 'Funny' },
 ]
 
 export const defaultTheme = themes[0]
