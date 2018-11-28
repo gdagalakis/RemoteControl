@@ -6,6 +6,7 @@ import InteractWithHistory from 'lib/InteractWithHistoryHOC'
 import { DevicesContext } from 'lib/DevicesProvider'
 import PlaceSelector from 'components/PlaceSelector'
 import { PlacesContext } from 'lib/PlacesProvider'
+import * as R from 'ramda'
 
 class DeviceForm extends Component {
     constructor(props) {
@@ -20,20 +21,9 @@ class DeviceForm extends Component {
         }
 
         this.setState({ form: newForm })
-        this.props.updateQuery(newForm)
-    }
-
-    handlePlaceChange = place => {
-        const newForm = {
-            ...this.state.form,
-            place,
-        }
-        this.setState({ form: newForm })
         this.props.updateQuery({
-            name: this.state.form.name,
-            ip: this.state.form.ip,
-            description: this.state.form.description,
-            place: place.id,
+            ...newForm,
+            place: R.path(['place', 'id'], newForm),
         })
     }
 
@@ -74,9 +64,9 @@ class DeviceForm extends Component {
                             {({ places }) => (
                                 <PlaceSelector
                                     desc="Place"
-                                    value={places}
-                                    placeId={this.props.query.place}
-                                    onChange={this.handlePlaceChange}
+                                    options={places}
+                                    value={this.props.query.place}
+                                    onChange={this.handleChange('place')}
                                 />
                             )}
                         </PlacesContext.Consumer>

@@ -1,33 +1,39 @@
 import React, { Component } from 'react'
 import Select from 'react-select'
 import { findById } from '../../lib/utils'
+import * as R from 'ramda'
+
 class PlaceSelector extends Component {
-    options = []
     constructor(props) {
         super(props)
-        const { value, placeId } = this.props
-        value.map(item => this.options.push({ value: item, label: item.name }))
+        const { options, value } = this.props
+        const places = options.map(item => ({ value: item, label: item.name }))
         this.state = {
-            selectedOption: this.options[value.findIndex(findById(placeId))],
+            places,
+            selectedOption: places[options.findIndex(findById(value))],
         }
+    }
+
+    componentDidMount() {
+        const selectedValue = R.path(['selectedOption', 'value'], this.state)
+        if (selectedValue) this.props.onChange(selectedValue)
     }
 
     handleChange = action => ev => {
         this.setState({ selectedOption: ev })
         action(ev.value)
-        // pass ev.value.id ?
     }
 
     render() {
         const { desc, onChange } = this.props
-
+        const { places, selectedOption } = this.state
         return (
             <div>
                 {desc}
                 {': '}
                 <Select
-                    options={this.options}
-                    value={this.state.selectedOption}
+                    options={places}
+                    value={selectedOption}
                     onChange={this.handleChange(onChange)}
                 />
             </div>
