@@ -24,6 +24,18 @@ export const NavWrapper = styled.nav`
         background-color: rgb(129, 226, 255);
         color: black;
     }
+
+    ul.submenu {
+        display: none;
+        position: absolute;
+        :hover {
+            display: flex;
+        }
+    }
+    a:hover + ul.submenu {
+        display: flex;
+    }
+
     > div {
         display: flex;
         align-items: center;

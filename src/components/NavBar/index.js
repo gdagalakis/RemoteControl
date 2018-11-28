@@ -33,9 +33,31 @@ class NavBar extends React.Component {
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to="/addPlaces/" activeClassName="active">
-                                AddPlaces
+                            <NavLink
+                                to="/addNew/"
+                                onClick={ev => ev.preventDefault()}
+                                activeClassName="active"
+                            >
+                                Add New
                             </NavLink>
+                            <ul className="submenu">
+                                <li>
+                                    <NavLink
+                                        to="/addNew/Places/"
+                                        activeClassName="active"
+                                    >
+                                        Places
+                                    </NavLink>
+                                </li>
+                                <li>
+                                    <NavLink
+                                        to="/addNew/Devices/"
+                                        activeClassName="active"
+                                    >
+                                        Devices
+                                    </NavLink>
+                                </li>
+                            </ul>
                         </li>
                     </ul>
                     <ThemeSelector

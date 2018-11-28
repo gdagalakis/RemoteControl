@@ -41,9 +41,9 @@ class App extends Component {
                                     <Route
                                         path="/"
                                         exact
-                                        component={props => (
+                                        component={() => (
                                             <Page title="HomePage">
-                                                <DeviceForm {...props} />
+                                                <a>Welcome!!!</a>
                                             </Page>
                                         )}
                                     />
@@ -57,10 +57,18 @@ class App extends Component {
                                         )}
                                     />
                                     <Route
-                                        path="/AddPlaces/"
+                                        path="/addNew/Places/"
                                         component={props => (
                                             <Page title="AddPlace">
                                                 <PlaceForm {...props} />
+                                            </Page>
+                                        )}
+                                    />
+                                    <Route
+                                        path="/addNew/Devices/"
+                                        component={props => (
+                                            <Page title="AddDevices">
+                                                <DeviceForm {...props} />
                                             </Page>
                                         )}
                                     />
