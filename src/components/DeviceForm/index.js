@@ -4,6 +4,9 @@ import { FormWrapper } from './style.js'
 import './style.js'
 import InteractWithHistory from 'lib/InteractWithHistoryHOC'
 import { DevicesContext } from 'lib/DevicesProvider'
+import PlaceSelector from 'components/PlaceSelector'
+import { PlacesContext } from 'lib/PlacesProvider'
+import * as R from 'ramda'
 
 class DeviceForm extends Component {
     constructor(props) {
@@ -18,7 +21,10 @@ class DeviceForm extends Component {
         }
 
         this.setState({ form: newForm })
-        this.props.updateQuery(newForm)
+        this.props.updateQuery({
+            ...newForm,
+            place: R.path(['place', 'id'], newForm),
+        })
     }
 
     handleSubmit = onSubmit => e => {
@@ -54,6 +60,16 @@ class DeviceForm extends Component {
                             value={form.description || ''}
                             onChange={this.handleChange('description')}
                         />
+                        <PlacesContext.Consumer>
+                            {({ places }) => (
+                                <PlaceSelector
+                                    desc="Place"
+                                    options={places}
+                                    value={this.props.query.place}
+                                    onChange={this.handleChange('place')}
+                                />
+                            )}
+                        </PlacesContext.Consumer>
                         <input type="submit" value="Submit" />
                     </FormWrapper>
                 )}
