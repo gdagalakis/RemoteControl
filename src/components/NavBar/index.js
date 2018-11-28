@@ -35,7 +35,7 @@ class NavBar extends React.Component {
                         <li>
                             <NavLink
                                 to="/addNew/"
-                                className="disabled"
+                                onClick={ev => ev.preventDefault()}
                                 activeClassName="active"
                             >
                                 Add New

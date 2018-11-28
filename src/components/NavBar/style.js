@@ -25,10 +25,6 @@ export const NavWrapper = styled.nav`
         color: black;
     }
 
-    .disabled:active {
-        pointer-events: none !important;
-    }
-
     ul.submenu {
         display: none;
         position: absolute;
