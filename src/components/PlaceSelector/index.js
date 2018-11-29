@@ -2,14 +2,13 @@ import React, { Component } from 'react'
 import Select from 'react-select'
 import * as R from 'ramda'
 import P from 'prop-types'
-import { PlacesContext } from 'lib/PlacesProvider'
+import PlacesConsumerHOC from 'lib/PlacesConsumerHOC'
 import { findById } from '../../lib/utils'
 
 class PlaceSelector extends Component {
-  constructor(props, context) {
-    super(props, context)
-    const { value } = this.props
-    const options = context.places
+  constructor(props) {
+    super(props)
+    const { value, places: options } = this.props
     const places = options.map(item => ({ value: item, label: item.name }))
     this.state = {
       places,
@@ -43,12 +42,12 @@ class PlaceSelector extends Component {
     )
   }
 }
-PlaceSelector.contextType = PlacesContext
 
 PlaceSelector.propTypes = {
   value: P.string,
+  places: P.object,
   onChange: P.func,
   desc: P.string,
 }
-
-export default PlaceSelector
+const mapContextToProps = R.pick(['places'])
+export default PlacesConsumerHOC(mapContextToProps)(PlaceSelector)
