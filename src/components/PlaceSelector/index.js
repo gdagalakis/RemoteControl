@@ -31,12 +31,20 @@ class PlaceSelector extends Component {
     const { places, selectedOption } = this.state
     return (
       <div>
-        {desc}
-        {': '}
-        <Select options={places} value={selectedOption} onChange={this.handleChange(onChange)} />
+        {desc ? desc + ': ' : ''}
+        <Select
+          options={places}
+          value={selectedOption}
+          onChange={this.handleChange(onChange)}
+        />
       </div>
     )
   }
 }
-PlaceSelector.propTypes = { options: P.object, value: P.string, onChange: P.func, desc: P.string }
+PlaceSelector.propTypes = {
+  options: P.object,
+  value: P.string,
+  onChange: P.func,
+  desc: P.string,
+}
 export default PlaceSelector

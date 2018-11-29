@@ -1,13 +1,14 @@
 import React from 'react'
 import P from 'prop-types'
 import DeviceItem from '../DeviceItem'
+import { DevListUl } from './style.js'
 import * as S from '../DeviceItem/style.js'
 
 const DeviceList = props => {
   const { devices, onDelete, onChangeActive, onSave } = props
   return (
     <div className="deviceList">
-      <ul>
+      <DevListUl>
         <S.Wrapper isHeader>
           <S.IdItem>ACTIVE ID</S.IdItem>
           <S.ItemName>NAME</S.ItemName>
@@ -26,7 +27,7 @@ const DeviceList = props => {
             saveChanges={onSave(item.id)}
           />
         ))}
-      </ul>
+      </DevListUl>
     </div>
   )
 }

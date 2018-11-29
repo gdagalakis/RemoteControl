@@ -1,16 +1,26 @@
 import React, { Component } from 'react'
-import * as R from 'ramda'
+import PlaceSelector from 'components/PlaceSelector'
 import P from 'prop-types'
-import { Wrapper, ItemPlaceSelector, IdItem, ItemName, ItemIP, ItemDescription, ItemActions } from './style.js'
+import { PlacesContext } from 'lib/PlacesProvider'
+import {
+  Wrapper,
+  ItemPlaceSelector,
+  IdItem,
+  ItemName,
+  ItemIP,
+  ItemDescription,
+  ItemActions,
+} from './style.js'
 
 class DeviceItem extends Component {
   constructor(props) {
     super(props)
-    const { name, ip, description } = props
+    const { name, ip, description, place } = props
     this.state = {
       editState: false,
       curName: name,
       curIp: ip,
+      curPlace: place,
       curDescription: description,
     }
   }
@@ -22,15 +32,20 @@ class DeviceItem extends Component {
 
   onSave = () => {
     const { saveChanges } = this.props
-    const { curDescription: description, curIp: ip, curName: name } = this.state
-    const item = { description, ip, name }
+    const {
+      curDescription: description,
+      curIp: ip,
+      curName: name,
+      curPlace: place,
+    } = this.state
+    const item = { description, ip, name, place }
     saveChanges(item)
     this.toggleEditState()
   }
 
   render() {
-    const { active, name, ip, description, onDelete, handleChange, index } = this.props
-    const { editState, curName, curIp, curDescription } = this.state
+    const { active, onDelete, handleChange, index } = this.props
+    const { editState, curPlace, curName, curIp, curDescription } = this.state
     return (
       <Wrapper>
         <IdItem>
@@ -78,15 +93,19 @@ class DeviceItem extends Component {
         </ItemDescription>
         <ItemPlaceSelector>
           {editState ? (
-            <input
-              type="text"
-              // value={}
-              onChange={e => {
-                this.setState({ curPlace: e.target.value })
-              }}
-            />
+            <PlacesContext.Consumer>
+              {({ places }) => (
+                <PlaceSelector
+                  value={curPlace.id}
+                  options={places}
+                  onChange={e => {
+                    this.setState({ curPlace: e })
+                  }}
+                />
+              )}
+            </PlacesContext.Consumer>
           ) : (
-            curDescription
+            curPlace.name
           )}
         </ItemPlaceSelector>
         <ItemActions>
@@ -114,6 +133,7 @@ class DeviceItem extends Component {
 DeviceItem.propTypes = {
   name: P.string,
   ip: P.string,
+  place: P.object,
   description: P.string,
   saveChanges: P.func,
   active: P.bool,
