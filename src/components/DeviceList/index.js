@@ -29,5 +29,10 @@ const DeviceList = props => {
     </div>
   )
 }
-DeviceList.propTypes = { devices: P.object, onDelete: P.func, onChangeActive: P.func, onSave: P.func }
+DeviceList.propTypes = {
+  devices: P.object,
+  onDelete: P.func,
+  onChangeActive: P.func,
+  onSave: P.func,
+}
 export default DeviceList
