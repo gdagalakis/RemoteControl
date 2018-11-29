@@ -35,7 +35,9 @@ export const ItemIP = styled(Item)`
 export const ItemDescription = styled(Item)`
   width: ${vars.itemDescriptionWidth};
 `
-
+export const ItemPlaceSelector = styled(Item)`
+  width: ${vars.itemPlaceSelectorWidth};
+`
 export const ItemActions = styled(Item)`
   width: ${vars.itemActionsWidth};
 `

@@ -13,6 +13,7 @@ const DeviceList = props => {
           <S.ItemName>NAME</S.ItemName>
           <S.ItemIP>IP</S.ItemIP>
           <S.ItemDescription>DESCRIPTION</S.ItemDescription>
+          <S.ItemPlaceSelector>PLACE</S.ItemPlaceSelector>
           <S.ItemActions>ACTIONS</S.ItemActions>
         </S.Wrapper>
         {devices.map((item, index) => (

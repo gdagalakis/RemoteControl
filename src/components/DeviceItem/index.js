@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import * as R from 'ramda'
 import P from 'prop-types'
-import { Wrapper, IdItem, ItemName, ItemIP, ItemDescription, ItemActions } from './style.js'
+import { Wrapper, ItemPlaceSelector, IdItem, ItemName, ItemIP, ItemDescription, ItemActions } from './style.js'
 
 const extractItem = R.pick(['ip', 'name', 'description'])
 class DeviceItem extends Component {
@@ -76,6 +76,19 @@ class DeviceItem extends Component {
             description
           )}
         </ItemDescription>
+        <ItemPlaceSelector>
+          {editState ? (
+            <input
+              type="text"
+              value={curDescription}
+              onChange={e => {
+                this.setState({ description: e.target.value })
+              }}
+            />
+          ) : (
+            description
+          )}
+        </ItemPlaceSelector>
         <ItemActions>
           <button type="button" onClick={onDelete}>
             {' '}
