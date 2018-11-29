@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import * as vars from '../DeviceList/style.js'
 
 export const Wrapper = styled.li`
-  font-weight: ${props => (props.isHeader ? 'bold' : '')};
+  ${props => props.isHeader && 'font-weight: bold'};
   width: 100%;
   display: flex;
   justify-content: flex-start;
