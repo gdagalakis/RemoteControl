@@ -50,7 +50,7 @@ class App extends Component {
 
                   <Route
                     path="/devices/"
-                    component={() => (
+                    component={props => (
                       <Page title="Devices">
                         <Devices />
                       </Page>

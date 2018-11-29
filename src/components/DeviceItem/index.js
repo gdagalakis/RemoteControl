@@ -3,7 +3,6 @@ import * as R from 'ramda'
 import P from 'prop-types'
 import { Wrapper, ItemPlaceSelector, IdItem, ItemName, ItemIP, ItemDescription, ItemActions } from './style.js'
 
-const extractItem = R.pick(['ip', 'name', 'description'])
 class DeviceItem extends Component {
   constructor(props) {
     super(props)
@@ -23,7 +22,8 @@ class DeviceItem extends Component {
 
   onSave = () => {
     const { saveChanges } = this.props
-    const item = extractItem(this.state)
+    const { curDescription: description, curIp: ip, curName: name } = this.state
+    const item = { description, ip, name }
     saveChanges(item)
     this.toggleEditState()
   }
@@ -43,11 +43,11 @@ class DeviceItem extends Component {
               type="text"
               value={curName}
               onChange={e => {
-                this.setState({ name: e.target.value })
+                this.setState({ curName: e.target.value })
               }}
             />
           ) : (
-            name
+            curName
           )}
         </ItemName>
         <ItemIP>
@@ -56,11 +56,11 @@ class DeviceItem extends Component {
               type="text"
               value={curIp}
               onChange={e => {
-                this.setState({ ip: e.target.value })
+                this.setState({ curIp: e.target.value })
               }}
             />
           ) : (
-            ip
+            curIp
           )}
         </ItemIP>
         <ItemDescription>
@@ -69,24 +69,24 @@ class DeviceItem extends Component {
               type="text"
               value={curDescription}
               onChange={e => {
-                this.setState({ description: e.target.value })
+                this.setState({ curDescription: e.target.value })
               }}
             />
           ) : (
-            description
+            curDescription
           )}
         </ItemDescription>
         <ItemPlaceSelector>
           {editState ? (
             <input
               type="text"
-              value={curDescription}
+              // value={}
               onChange={e => {
-                this.setState({ description: e.target.value })
+                this.setState({ curPlace: e.target.value })
               }}
             />
           ) : (
-            description
+            curDescription
           )}
         </ItemPlaceSelector>
         <ItemActions>
