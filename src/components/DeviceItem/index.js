@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
 import PlaceSelector from 'components/PlaceSelector'
 import P from 'prop-types'
-import { PlacesContext } from 'lib/PlacesProvider'
 import {
-  Wrapper,
+  Row,
   ItemPlaceSelector,
   IdItem,
   ItemName,
@@ -47,7 +46,7 @@ class DeviceItem extends Component {
     const { active, onDelete, handleChange, index } = this.props
     const { editState, curPlace, curName, curIp, curDescription } = this.state
     return (
-      <Wrapper>
+      <Row>
         <IdItem>
           <input type="checkbox" onChange={handleChange} checked={active} />
           {index}
@@ -93,17 +92,12 @@ class DeviceItem extends Component {
         </ItemDescription>
         <ItemPlaceSelector>
           {editState ? (
-            <PlacesContext.Consumer>
-              {({ places }) => (
-                <PlaceSelector
-                  value={curPlace.id}
-                  options={places}
-                  onChange={e => {
-                    this.setState({ curPlace: e })
-                  }}
-                />
-              )}
-            </PlacesContext.Consumer>
+            <PlaceSelector
+              value={curPlace.id}
+              onChange={e => {
+                this.setState({ curPlace: e })
+              }}
+            />
           ) : (
             curPlace.name
           )}
@@ -125,7 +119,7 @@ class DeviceItem extends Component {
             </button>
           )}
         </ItemActions>
-      </Wrapper>
+      </Row>
     )
   }
 }

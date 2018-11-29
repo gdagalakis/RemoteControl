@@ -35,7 +35,11 @@ export class PlacesProvider extends Component {
 
   render() {
     const { children } = this.props
-    return <PlacesContext.Provider value={this.state}>{children}</PlacesContext.Provider>
+    return (
+      <PlacesContext.Provider value={this.state}>
+        {children}
+      </PlacesContext.Provider>
+    )
   }
 }
 PlacesProvider.propTypes = {

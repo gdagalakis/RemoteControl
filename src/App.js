@@ -8,7 +8,6 @@ import PlaceForm from './components/PlaceForm'
 import NavBar from './components/NavBar'
 import Devices from './pages/Devices'
 import Page from './components/Page'
-import { guid } from './utils'
 import { GlobalStyle, defaultTheme } from './globalStyle'
 import AppDiv from './style.js'
 import 'normalize.css'
@@ -52,7 +51,7 @@ class App extends Component {
                     path="/devices/"
                     component={props => (
                       <Page title="Devices">
-                        <Devices />
+                        <Devices {...props} />
                       </Page>
                     )}
                   />
