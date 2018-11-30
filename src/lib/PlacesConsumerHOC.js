@@ -1,8 +1,13 @@
 import React from 'react'
 import { PlacesContext } from 'lib/PlacesProvider'
+import * as R from 'ramda'
 import { getDisplayName } from './utils'
 
-export default mapContextToProps => WrappedComponent => {
+const defaultMapContextToProps = R.identity
+
+export default (
+  mapContextToProps = defaultMapContextToProps,
+) => WrappedComponent => {
   const Wrapper = props => (
     <PlacesContext.Consumer>
       {value => <WrappedComponent {...props} {...mapContextToProps(value)} />}

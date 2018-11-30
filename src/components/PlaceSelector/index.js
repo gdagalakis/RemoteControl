@@ -8,7 +8,7 @@ import { findById } from '../../lib/utils'
 class PlaceSelector extends Component {
   constructor(props) {
     super(props)
-    const { value, places: options } = this.props
+    const { value, places: options } = props
     const places = options.map(item => ({ value: item, label: item.name }))
     this.state = {
       places,
