@@ -24,11 +24,6 @@ class DeviceItem extends Component {
     }
   }
 
-  toggleEditState = () => {
-    const { editState } = this.state
-    this.setState({ editState: !editState })
-  }
-
   onSave = () => {
     const { saveChanges } = this.props
     const {
@@ -40,6 +35,10 @@ class DeviceItem extends Component {
     const item = { description, ip, name, place }
     saveChanges(item)
     this.toggleEditState()
+  }
+  toggleEditState = () => {
+    const { editState } = this.state
+    this.setState({ editState: !editState })
   }
 
   render() {
