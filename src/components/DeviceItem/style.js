@@ -1,11 +1,13 @@
 import styled from 'styled-components'
 import * as vars from '../DeviceList/style.js'
 
-export const Wrapper = styled.li`
-  ${props => props.isHeader && 'font-weight: bold'};
+export const Row = styled.li`
   width: 100%;
   display: flex;
   justify-content: flex-start;
+`
+export const Header = styled(Row)`
+  font-weight: bold;
 `
 export const Item = styled.div`
   border: 1px solid ${props => props.theme.border};
@@ -35,7 +37,9 @@ export const ItemIP = styled(Item)`
 export const ItemDescription = styled(Item)`
   width: ${vars.itemDescriptionWidth};
 `
-
+export const ItemPlaceSelector = styled(Item)`
+  width: ${vars.itemPlaceSelectorWidth};
+`
 export const ItemActions = styled(Item)`
   width: ${vars.itemActionsWidth};
 `

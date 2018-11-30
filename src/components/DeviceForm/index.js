@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import InteractWithHistory from 'lib/InteractWithHistoryHOC'
 import { DevicesContext } from 'lib/DevicesProvider'
 import PlaceSelector from 'components/PlaceSelector'
-import { PlacesContext } from 'lib/PlacesProvider'
 import * as R from 'ramda'
 import P from 'prop-types'
 import FormInput from '../FormInput'
@@ -45,24 +44,30 @@ class DeviceForm extends Component {
       <DevicesContext.Consumer>
         {({ onSubmit }) => (
           <FormWrapper onSubmit={this.handleSubmit(onSubmit)}>
-            <FormInput desc="Name" name="name" value={form.name || ''} onChange={this.handleChange('name')} />
-            <FormInput desc="IP" isFunny value={form.ip || ''} name="ip" onChange={this.handleChange('ip')} />
+            <FormInput
+              desc="Name"
+              name="name"
+              value={form.name || ''}
+              onChange={this.handleChange('name')}
+            />
+            <FormInput
+              desc="IP"
+              isFunny
+              value={form.ip || ''}
+              name="ip"
+              onChange={this.handleChange('ip')}
+            />
             <FormInput
               desc="Description"
               name="description"
               value={form.description || ''}
               onChange={this.handleChange('description')}
             />
-            <PlacesContext.Consumer>
-              {({ places }) => (
-                <PlaceSelector
-                  desc="Place"
-                  options={places}
-                  value={query.place}
-                  onChange={this.handleChange('place')}
-                />
-              )}
-            </PlacesContext.Consumer>
+            <PlaceSelector
+              desc="Place"
+              value={query.place}
+              onChange={this.handleChange('place')}
+            />
             <input type="submit" value="Submit" />
           </FormWrapper>
         )}

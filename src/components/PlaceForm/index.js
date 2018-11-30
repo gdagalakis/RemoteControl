@@ -38,7 +38,12 @@ class PlaceForm extends Component {
       <PlacesContext.Consumer>
         {({ onSubmit }) => (
           <FormWrapper onSubmit={this.handleSubmit(onSubmit)}>
-            <FormInput desc="Name" name="name" value={form.name || ''} onChange={this.handleChange('name')} />
+            <FormInput
+              desc="Name"
+              name="name"
+              value={form.name || ''}
+              onChange={this.handleChange('name')}
+            />
             <FormInput
               desc="Description"
               name="description"
@@ -70,7 +75,7 @@ class PlaceForm extends Component {
   }
 }
 PlaceForm.propTypes = {
-  query: P.string,
+  query: P.object,
   updateQuery: P.func,
   clearQuery: P.func,
 }

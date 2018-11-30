@@ -1,17 +1,25 @@
 import React, { Component } from 'react'
-import * as R from 'ramda'
+import PlaceSelector from 'components/PlaceSelector'
 import P from 'prop-types'
-import { Wrapper, IdItem, ItemName, ItemIP, ItemDescription, ItemActions } from './style.js'
+import {
+  Row,
+  ItemPlaceSelector,
+  IdItem,
+  ItemName,
+  ItemIP,
+  ItemDescription,
+  ItemActions,
+} from './style.js'
 
-const extractItem = R.pick(['ip', 'name', 'description'])
 class DeviceItem extends Component {
   constructor(props) {
     super(props)
-    const { name, ip, description } = props
+    const { name, ip, description, place } = props
     this.state = {
       editState: false,
       curName: name,
       curIp: ip,
+      curPlace: place,
       curDescription: description,
     }
   }
@@ -23,16 +31,22 @@ class DeviceItem extends Component {
 
   onSave = () => {
     const { saveChanges } = this.props
-    const item = extractItem(this.state)
+    const {
+      curDescription: description,
+      curIp: ip,
+      curName: name,
+      curPlace: place,
+    } = this.state
+    const item = { description, ip, name, place }
     saveChanges(item)
     this.toggleEditState()
   }
 
   render() {
-    const { active, name, ip, description, onDelete, handleChange, index } = this.props
-    const { editState, curName, curIp, curDescription } = this.state
+    const { active, onDelete, handleChange, index } = this.props
+    const { editState, curPlace, curName, curIp, curDescription } = this.state
     return (
-      <Wrapper>
+      <Row>
         <IdItem>
           <input type="checkbox" onChange={handleChange} checked={active} />
           {index}
@@ -43,11 +57,11 @@ class DeviceItem extends Component {
               type="text"
               value={curName}
               onChange={e => {
-                this.setState({ name: e.target.value })
+                this.setState({ curName: e.target.value })
               }}
             />
           ) : (
-            name
+            curName
           )}
         </ItemName>
         <ItemIP>
@@ -56,11 +70,11 @@ class DeviceItem extends Component {
               type="text"
               value={curIp}
               onChange={e => {
-                this.setState({ ip: e.target.value })
+                this.setState({ curIp: e.target.value })
               }}
             />
           ) : (
-            ip
+            curIp
           )}
         </ItemIP>
         <ItemDescription>
@@ -69,13 +83,25 @@ class DeviceItem extends Component {
               type="text"
               value={curDescription}
               onChange={e => {
-                this.setState({ description: e.target.value })
+                this.setState({ curDescription: e.target.value })
               }}
             />
           ) : (
-            description
+            curDescription
           )}
         </ItemDescription>
+        <ItemPlaceSelector>
+          {editState ? (
+            <PlaceSelector
+              value={curPlace.id}
+              onChange={e => {
+                this.setState({ curPlace: e })
+              }}
+            />
+          ) : (
+            curPlace.name
+          )}
+        </ItemPlaceSelector>
         <ItemActions>
           <button type="button" onClick={onDelete}>
             {' '}
@@ -93,7 +119,7 @@ class DeviceItem extends Component {
             </button>
           )}
         </ItemActions>
-      </Wrapper>
+      </Row>
     )
   }
 }
@@ -101,6 +127,7 @@ class DeviceItem extends Component {
 DeviceItem.propTypes = {
   name: P.string,
   ip: P.string,
+  place: P.object,
   description: P.string,
   saveChanges: P.func,
   active: P.bool,
