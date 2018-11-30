@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import InteractWithHistory from 'lib/InteractWithHistoryHOC'
-import { DevicesContext } from 'lib/DevicesProvider'
 import PlaceSelector from 'components/PlaceSelector'
 import * as R from 'ramda'
 import DeviceConsumerHOC from 'lib/DeviceConsumerHOC'
@@ -80,6 +79,8 @@ DeviceForm.propTypes = {
   onSubmit: P.func,
 }
 const mapContextToProps = R.pick(['onSubmit'])
-export default InteractWithHistory(
-  DeviceConsumerHOC(mapContextToProps)(DeviceForm),
-)
+
+export default R.compose(
+  InteractWithHistory,
+  DeviceConsumerHOC(mapContextToProps),
+)(DeviceForm)
