@@ -1,11 +1,14 @@
 import React from 'react'
-import { DevicesContext } from 'lib/DevicesProvider'
+import DeviceConsumerHOC from 'lib/DeviceConsumerHOC'
+import * as R from 'ramda'
 import DeviceList from '../../components/DeviceList'
 
-const Devices = () => (
-  <DevicesContext.Consumer>
-    {value => <DeviceList {...value} />}
-  </DevicesContext.Consumer>
-)
+const Devices = props => <DeviceList {...props} />
+const mapContextToProps = R.pick([
+  'devices',
+  'onDelete',
+  'onChangeActive',
+  'onSave',
+])
 
-export default Devices
+export default DeviceConsumerHOC(mapContextToProps)(Devices)

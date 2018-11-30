@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import InteractWithHistory from 'lib/InteractWithHistoryHOC'
-import { DevicesContext } from 'lib/DevicesProvider'
 import PlaceSelector from 'components/PlaceSelector'
 import * as R from 'ramda'
+import DeviceConsumerHOC from 'lib/DeviceConsumerHOC'
 import P from 'prop-types'
 import FormInput from '../FormInput'
 import FormWrapper from './style.js'
@@ -39,45 +39,48 @@ class DeviceForm extends Component {
 
   render() {
     const { form } = this.state
-    const { query } = this.props
+    const { query, onSubmit } = this.props
     return (
-      <DevicesContext.Consumer>
-        {({ onSubmit }) => (
-          <FormWrapper onSubmit={this.handleSubmit(onSubmit)}>
-            <FormInput
-              desc="Name"
-              name="name"
-              value={form.name || ''}
-              onChange={this.handleChange('name')}
-            />
-            <FormInput
-              desc="IP"
-              isFunny
-              value={form.ip || ''}
-              name="ip"
-              onChange={this.handleChange('ip')}
-            />
-            <FormInput
-              desc="Description"
-              name="description"
-              value={form.description || ''}
-              onChange={this.handleChange('description')}
-            />
-            <PlaceSelector
-              desc="Place"
-              value={query.place}
-              onChange={this.handleChange('place')}
-            />
-            <input type="submit" value="Submit" />
-          </FormWrapper>
-        )}
-      </DevicesContext.Consumer>
+      <FormWrapper onSubmit={this.handleSubmit(onSubmit)}>
+        <FormInput
+          desc="Name"
+          name="name"
+          value={form.name || ''}
+          onChange={this.handleChange('name')}
+        />
+        <FormInput
+          desc="IP"
+          isFunny
+          value={form.ip || ''}
+          name="ip"
+          onChange={this.handleChange('ip')}
+        />
+        <FormInput
+          desc="Description"
+          name="description"
+          value={form.description || ''}
+          onChange={this.handleChange('description')}
+        />
+        <PlaceSelector
+          desc="Place"
+          value={query.place}
+          onChange={this.handleChange('place')}
+        />
+        <input type="submit" value="Submit" />
+      </FormWrapper>
     )
   }
 }
+
 DeviceForm.propTypes = {
   clearQuery: P.func,
   updateQuery: P.func,
   query: P.object,
+  onSubmit: P.func,
 }
-export default InteractWithHistory(DeviceForm)
+const mapContextToProps = R.pick(['onSubmit'])
+
+export default R.compose(
+  InteractWithHistory,
+  DeviceConsumerHOC(mapContextToProps),
+)(DeviceForm)
