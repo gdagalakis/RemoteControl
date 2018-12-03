@@ -1,6 +1,14 @@
+import { createClient } from 'service-mocker/client'
+
 import React from 'react'
+// eslint-disable-next-line import/no-webpack-loader-syntax
+import scriptURL from 'sw-loader!./server.js'
 import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
 
-ReactDOM.render(<App />, document.getElementById('root'))
+const client = createClient(scriptURL)
+
+client.ready.then(async () => {
+  ReactDOM.render(<App />, document.getElementById('root'))
+})

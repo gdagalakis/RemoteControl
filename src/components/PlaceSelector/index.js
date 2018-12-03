@@ -45,7 +45,7 @@ class PlaceSelector extends Component {
 
 PlaceSelector.propTypes = {
   value: P.string,
-  places: P.object,
+  places: P.array,
   onChange: P.func,
   desc: P.string,
 }
