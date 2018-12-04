@@ -33,7 +33,7 @@ router.post('/devices/create', async (req, res) => {
   const updatedDevices = [...devices, body]
   await LS.setItem('devices', updatedDevices)
   console.log(updatedDevices)
-  res.json({ result: body })
+  res.json(body)
 })
 
 router.put('/devices/edit/:id', async (req, res) => {
@@ -47,7 +47,7 @@ router.put('/devices/edit/:id', async (req, res) => {
   )
   await LS.setItem('devices', updatedDevices)
   console.log(updatedDevices)
-  res.json({ result: body })
+  res.json(body)
 })
 
 router.delete('/devices/remove/:id', async (req, res) => {

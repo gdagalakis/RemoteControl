@@ -15,13 +15,11 @@ const readDevices = urlParams =>
 
 const updateDevice = async (id, item) => {
   const response = await update(`http://localhost/api/devices/edit/${id}`, item)
-  return response.json.result
-}
 
-const deleteDevice = async id => {
-  const response = await destroy(`http://localhost/api/devices/remove/${id}`)
   return response
 }
+
+const deleteDevice = id => destroy(`http://localhost/api/devices/remove/${id}`)
 
 export class DeviceProvider extends Component {
   constructor(props) {
@@ -45,7 +43,7 @@ export class DeviceProvider extends Component {
   onDeviceFormSubmit = async item => {
     const { devices } = this.state
     const response = await create('http://localhost/api/devices/create', item)
-    const newDevices = devices.concat(response.result)
+    const newDevices = devices.concat(response)
     this.setState({
       devices: newDevices,
     })
@@ -76,7 +74,6 @@ export class DeviceProvider extends Component {
       offset,
       limit,
     })
-
     return response.data
   }
 
