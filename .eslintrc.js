@@ -17,6 +17,7 @@ module.exports = {
 
   rules: {
     semi: [2, 'never'],
+
     'max-len': [1, 80, 2],
     'func-names': 0,
     'arrow-parens': [2, 'as-needed'],
@@ -41,6 +42,7 @@ module.exports = {
     'linebreak-style': 0,
     'implicit-arrow-linebreak': 0,
     'import/prefer-default-export': 1,
+    'react/no-did-mount-set-state': 0,
     'react/require-default-props': 0,
     'react/prop-types': 2,
     'react/jsx-filename-extension': 0,

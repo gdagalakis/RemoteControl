@@ -2,6 +2,7 @@ import { guid } from 'utils'
 import { createServer } from 'service-mocker/server'
 import * as R from 'ramda'
 import * as LS from 'localforage'
+import { findById } from 'lib/utils'
 
 const { router } = createServer('http://localhost/api')
 
@@ -10,16 +11,6 @@ const getDevices = async () => {
   console.log(value)
   return value || []
 }
-
-router.post('/process', async (req, res) => {
-  let body = await req.json()
-  res.json({ result: body })
-})
-
-// or you can use the shorthand method
-router.get('/greet', async (req, res) => {
-  res.json({ result: 'hello!' })
-})
 
 router.get('/devices', async (req, res) => {
   const devices = await getDevices()
@@ -43,4 +34,30 @@ router.post('/devices/create', async (req, res) => {
   await LS.setItem('devices', updatedDevices)
   console.log(updatedDevices)
   res.json({ result: body })
+})
+
+router.put('/devices/edit/:id', async (req, res) => {
+  let body = await req.json()
+  const devices = await getDevices()
+  const deviceFoundIndex = devices.findIndex(findById(req.params.id))
+  const updatedDevices = R.adjust(
+    R.mergeDeepLeft(body),
+    deviceFoundIndex,
+    devices,
+  )
+  await LS.setItem('devices', updatedDevices)
+  console.log(updatedDevices)
+  res.json({ result: body })
+})
+
+router.delete('/devices/remove/:id', async (req, res) => {
+  const devices = await getDevices()
+  const updatedDevices = R.remove(
+    devices.findIndex(findById(req.params.id)),
+    1,
+    devices,
+  )
+  await LS.setItem('devices', updatedDevices)
+  console.log(updatedDevices)
+  res.sendStatus(200)
 })
