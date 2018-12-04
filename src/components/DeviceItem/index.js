@@ -124,6 +124,10 @@ class DeviceItem extends Component {
 }
 DeviceItem.defaultProps = {
   place: {},
+  name: '',
+  ip: '',
+  active: false,
+  description: '',
 }
 DeviceItem.propTypes = {
   name: P.string,
