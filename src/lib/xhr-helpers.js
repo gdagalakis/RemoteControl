@@ -5,8 +5,7 @@ export const read = async url => {
       'Content-Type': 'application/json',
     },
   })
-  const data = await response.json()
-  return data
+  return response.json()
 }
 
 export const create = async (url, data) => {
