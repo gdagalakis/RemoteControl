@@ -11,6 +11,7 @@ import Page from './components/Page'
 import { GlobalStyle, defaultTheme } from './globalStyle'
 import AppDiv from './style.js'
 import 'normalize.css'
+import createMockData from 'utils/mockdata'
 
 class App extends Component {
   constructor(props) {
@@ -18,6 +19,7 @@ class App extends Component {
     this.state = {
       curTheme: defaultTheme.value,
     }
+    createMockData()
   }
 
   changeTheme = theme => {
