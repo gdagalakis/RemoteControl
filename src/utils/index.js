@@ -1,8 +1,10 @@
 export const objectToUrl = obj =>
-  Object.keys(obj)
-    .filter(i => !!obj[i])
-    .map(i => `${i}=${obj[i]}`)
-    .join('&')
+  (obj
+    ? Object.keys(obj)
+      .filter(i => !!obj[i])
+      .map(i => `${i}=${obj[i]}`)
+      .join('&')
+    : '')
 
 const splitReducer = (acc, strPair) => {
   const [keyValue0, keyValue1] = strPair.split('=')
@@ -20,5 +22,18 @@ export const guid = () => {
     Math.floor((1 + Math.random()) * 0x10000)
       .toString(16)
       .substring(1)
-  return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4()
+  return (
+    s4() +
+    s4() +
+    '-' +
+    s4() +
+    '-' +
+    s4() +
+    '-' +
+    s4() +
+    '-' +
+    s4() +
+    s4() +
+    s4()
+  )
 }

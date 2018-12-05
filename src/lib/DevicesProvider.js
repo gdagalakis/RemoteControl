@@ -15,7 +15,6 @@ const readDevices = urlParams =>
 
 const updateDevice = async (id, item) => {
   const response = await update(`http://localhost/api/devices/edit/${id}`, item)
-
   return response
 }
 
@@ -24,8 +23,6 @@ const deleteDevice = id => destroy(`http://localhost/api/devices/remove/${id}`)
 export class DeviceProvider extends Component {
   constructor(props) {
     super(props)
-    // const cachedDevices = localStorage.getItem('devices')
-
     this.state = {
       devices: [],
       onSave: this.onSaveHandler,
@@ -36,8 +33,8 @@ export class DeviceProvider extends Component {
   }
 
   async componentDidMount() {
-    const dev = await this.getDevices()
-    this.setState({ devices: dev })
+    const dev = await readDevices()
+    this.setState({ devices: dev.data })
   }
 
   onDeviceFormSubmit = async item => {
@@ -67,14 +64,6 @@ export class DeviceProvider extends Component {
     const newDevices = R.adjust(toggleActive, deviceFoundIndex, devices)
     this.setState({ devices: newDevices })
     updateDevice(id, newDevices[deviceFoundIndex])
-  }
-
-  getDevices = async (offset, limit) => {
-    const response = await readDevices({
-      offset,
-      limit,
-    })
-    return response.data
   }
 
   deleteHandler = async id => {

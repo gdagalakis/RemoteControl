@@ -12,6 +12,27 @@ const getDevices = async () => {
   return value || []
 }
 
+const getPlaces = async () => {
+  const value = await LS.getItem('places')
+  console.log(value)
+  return value || []
+}
+
+router.get('/places', async (req, res) => {
+  const places = await getPlaces()
+  res.json(places)
+})
+
+router.post('/places/create', async (req, res) => {
+  let body = await req.json()
+  body.id = guid()
+  const places = await getPlaces()
+  const updatedPlaces = [...places, body]
+  await LS.setItem('places', updatedPlaces)
+  console.log(updatedPlaces)
+  res.json(body)
+})
+
 router.get('/devices', async (req, res) => {
   const devices = await getDevices()
   console.log(devices)
