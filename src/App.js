@@ -15,25 +15,6 @@ import 'normalize.css'
 class App extends Component {
   constructor(props) {
     super(props)
-    // fetch('/devices/create', {
-    //   method: 'POST', // or 'PUT'
-    //   body: JSON.stringify({ name: 'giorgos' }), // data can be `string` or {object}!
-    //   headers: {
-    //     'Content-Type': 'application/json',
-    //   },
-    // })
-    //   .then(response => {
-    //     console.log(response)
-    //     return response.json()
-    //   })
-    //   .then(json => {
-    //     // this.state = { response: json }
-    //     console.log(json.result)
-    //   })
-    //   .catch(error => {
-    //     // AHHHH! An Error!
-    //     console.error(error)
-    //   })
     this.state = {
       curTheme: defaultTheme.value,
     }

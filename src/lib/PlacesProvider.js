@@ -8,9 +8,9 @@ const normalizeItem = ({ name, description, posLat, posLong }) => ({
   description,
   position: { posLat, posLong },
 })
-const readPlaces = () => read('http://localhost/api/places')
+const readPlaces = () => read('/places')
 
-const createPlace = item => create('http://localhost/api/places/create', item)
+const createPlace = item => create('/places/create', item)
 
 export const PlacesContext = React.createContext()
 

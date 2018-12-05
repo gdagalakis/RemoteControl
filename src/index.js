@@ -1,6 +1,5 @@
-import { createClient } from 'service-mocker/client'
-
 import React from 'react'
+import { createClient } from 'service-mocker/client'
 // eslint-disable-next-line import/no-webpack-loader-syntax
 import scriptURL from 'sw-loader!./server.js'
 import ReactDOM from 'react-dom'

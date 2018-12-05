@@ -10,15 +10,14 @@ export const DevicesContext = React.createContext()
 
 const toggleActive = R.over(R.lensProp('active'), R.not)
 
-const readDevices = urlParams =>
-  read(`http://localhost/api/devices?${objectToUrl(urlParams)}`)
+const readDevices = urlParams => read(`/devices?${objectToUrl(urlParams)}`)
 
-const updateDevice = async (id, item) => {
-  const response = await update(`http://localhost/api/devices/edit/${id}`, item)
+const updateDevice = (id, item) => {
+  const response = update(`/devices/edit/${id}`, item)
   return response
 }
-
-const deleteDevice = id => destroy(`http://localhost/api/devices/remove/${id}`)
+const createDevice = item => create('/devices/create', item)
+const deleteDevice = id => destroy(`/devices/remove/${id}`)
 
 export class DeviceProvider extends Component {
   constructor(props) {
@@ -39,8 +38,8 @@ export class DeviceProvider extends Component {
 
   onDeviceFormSubmit = async item => {
     const { devices } = this.state
-    const response = await create('http://localhost/api/devices/create', item)
-    const newDevices = devices.concat(response)
+    const device = await createDevice(item)
+    const newDevices = devices.concat(device)
     this.setState({
       devices: newDevices,
     })

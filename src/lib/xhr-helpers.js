@@ -1,5 +1,7 @@
+const apiUrl = 'http://localhost/api'
+
 export const read = async url => {
-  const response = await fetch(url, {
+  const response = await fetch(`${apiUrl}${url}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -9,7 +11,7 @@ export const read = async url => {
 }
 
 export const create = async (url, data) => {
-  const response = await fetch(url, {
+  const response = await fetch(`${apiUrl}${url}`, {
     method: 'POST',
     body: JSON.stringify(data),
     headers: {
@@ -20,7 +22,7 @@ export const create = async (url, data) => {
 }
 
 export const update = async (url, data) => {
-  const response = await fetch(url, {
+  const response = await fetch(`${apiUrl}${url}`, {
     method: 'PUT',
     body: JSON.stringify(data),
     headers: {
@@ -31,7 +33,7 @@ export const update = async (url, data) => {
 }
 
 export const destroy = async url => {
-  const response = await fetch(url, {
+  const response = await fetch(`${apiUrl}${url}`, {
     method: 'DELETE',
     headers: {
       'Content-Type': 'application/json',

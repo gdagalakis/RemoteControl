@@ -6,28 +6,24 @@ import PlacesConsumerHOC from 'lib/PlacesConsumerHOC'
 import { findById } from '../../lib/utils'
 
 class PlaceSelector extends Component {
-  constructor(props) {
-    super(props)
+  static getDerivedStateFromProps(props) {
     const { value, places: options } = props
     const places = options.map(item => ({ value: item, label: item.name }))
-    this.state = {
+    return {
       places,
       selectedOption: places[options.findIndex(findById(value))],
     }
+  }
+
+  constructor(props) {
+    super(props)
+    this.state = {}
   }
 
   componentDidMount() {
     const { onChange } = this.props
     const selectedValue = R.path(['selectedOption', 'value'], this.state)
     if (selectedValue) onChange(selectedValue)
-  }
-  componentDidUpdate(prevProps) {
-    if (prevProps.places !== this.props.places) {
-      const { places: options } = this.props
-      const places = options.map(item => ({ value: item, label: item.name }))
-      // eslint-disable-next-line react/no-did-update-set-state
-      this.setState({ places })
-    }
   }
 
   handleChange = action => ev => {
@@ -52,8 +48,6 @@ class PlaceSelector extends Component {
 }
 
 PlaceSelector.propTypes = {
-  value: P.string,
-  places: P.array,
   onChange: P.func,
   desc: P.string,
 }

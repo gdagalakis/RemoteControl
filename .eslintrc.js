@@ -17,7 +17,6 @@ module.exports = {
 
   rules: {
     semi: [2, 'never'],
-
     'max-len': [1, 80, 2],
     'func-names': 0,
     'arrow-parens': [2, 'as-needed'],

@@ -24,13 +24,13 @@ router.get('/places', async (req, res) => {
 })
 
 router.post('/places/create', async (req, res) => {
-  let body = await req.json()
-  body.id = guid()
+  let newPlace = await req.json()
+  newPlace.id = guid()
   const places = await getPlaces()
-  const updatedPlaces = [...places, body]
+  const updatedPlaces = [...places, newPlace]
   await LS.setItem('places', updatedPlaces)
   console.log(updatedPlaces)
-  res.json(body)
+  res.json(newPlace)
 })
 
 router.get('/devices', async (req, res) => {
@@ -48,27 +48,27 @@ router.get('/devices', async (req, res) => {
 })
 
 router.post('/devices/create', async (req, res) => {
-  let body = await req.json()
-  body.id = guid()
+  let newDevice = await req.json()
+  newDevice.id = guid()
   const devices = await getDevices()
-  const updatedDevices = [...devices, body]
+  const updatedDevices = [...devices, newDevice]
   await LS.setItem('devices', updatedDevices)
   console.log(updatedDevices)
-  res.json(body)
+  res.json(newDevice)
 })
 
 router.put('/devices/edit/:id', async (req, res) => {
-  let body = await req.json()
+  let newDevice = await req.json()
   const devices = await getDevices()
   const deviceFoundIndex = devices.findIndex(findById(req.params.id))
   const updatedDevices = R.adjust(
-    R.mergeDeepLeft(body),
+    R.mergeDeepLeft(newDevice),
     deviceFoundIndex,
     devices,
   )
   await LS.setItem('devices', updatedDevices)
   console.log(updatedDevices)
-  res.json(body)
+  res.json(newDevice)
 })
 
 router.delete('/devices/remove/:id', async (req, res) => {
