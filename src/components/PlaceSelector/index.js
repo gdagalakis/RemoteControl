@@ -21,6 +21,14 @@ class PlaceSelector extends Component {
     const selectedValue = R.path(['selectedOption', 'value'], this.state)
     if (selectedValue) onChange(selectedValue)
   }
+  componentDidUpdate(prevProps) {
+    if (prevProps.places !== this.props.places) {
+      const { places: options } = this.props
+      const places = options.map(item => ({ value: item, label: item.name }))
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({ places })
+    }
+  }
 
   handleChange = action => ev => {
     this.setState({ selectedOption: ev })

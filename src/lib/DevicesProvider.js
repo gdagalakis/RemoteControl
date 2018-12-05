@@ -49,6 +49,7 @@ export class DeviceProvider extends Component {
   onSaveHandler = R.curry((id, item) => {
     const { devices } = this.state
     const newDevice = updateDevice(id, item)
+
     const deviceFoundIndex = devices.findIndex(findById(id))
     const newDevices = R.adjust(
       R.mergeDeepLeft(newDevice),
