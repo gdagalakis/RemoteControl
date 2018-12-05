@@ -12,10 +12,8 @@ const toggleActive = R.over(R.lensProp('active'), R.not)
 
 const readDevices = urlParams => read(`/devices?${objectToUrl(urlParams)}`)
 
-const updateDevice = (id, item) => {
-  const response = update(`/devices/edit/${id}`, item)
-  return response
-}
+const updateDevice = (id, item) => update(`/devices/edit/${id}`, item)
+
 const createDevice = item => create('/devices/create', item)
 const deleteDevice = id => destroy(`/devices/remove/${id}`)
 
