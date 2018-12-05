@@ -5,6 +5,7 @@ import { getDisplayName } from './utils'
 export default WrappedComponent => {
   class Wrapper extends Component {
     constructor(props) {
+      // eslint-disable-next-line react/prop-types
       const { history } = props
       super(props)
       const obj = queryString.parse(history.location.search)

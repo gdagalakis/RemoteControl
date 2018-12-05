@@ -5,9 +5,7 @@ import { getDisplayName } from './utils'
 
 const defaultMapContextToProps = R.identity
 
-export default (
-  mapContextToProps = defaultMapContextToProps,
-) => WrappedComponent => {
+export default (mapContextToProps = defaultMapContextToProps) => WrappedComponent => {
   const Wrapper = props => (
     <DevicesContext.Consumer>
       {value => <WrappedComponent {...props} {...mapContextToProps(value)} />}

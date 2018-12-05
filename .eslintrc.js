@@ -41,6 +41,7 @@ module.exports = {
     'linebreak-style': 0,
     'implicit-arrow-linebreak': 0,
     'import/prefer-default-export': 1,
+    'react/no-did-mount-set-state': 0,
     'react/require-default-props': 0,
     'react/prop-types': 2,
     'react/jsx-filename-extension': 0,

@@ -6,14 +6,18 @@ import PlacesConsumerHOC from 'lib/PlacesConsumerHOC'
 import { findById } from '../../lib/utils'
 
 class PlaceSelector extends Component {
-  constructor(props) {
-    super(props)
+  static getDerivedStateFromProps(props) {
     const { value, places: options } = props
     const places = options.map(item => ({ value: item, label: item.name }))
-    this.state = {
+    return {
       places,
       selectedOption: places[options.findIndex(findById(value))],
     }
+  }
+
+  constructor(props) {
+    super(props)
+    this.state = {}
   }
 
   componentDidMount() {
@@ -44,8 +48,6 @@ class PlaceSelector extends Component {
 }
 
 PlaceSelector.propTypes = {
-  value: P.string,
-  places: P.object,
   onChange: P.func,
   desc: P.string,
 }

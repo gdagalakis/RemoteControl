@@ -5,9 +5,8 @@ import { getDisplayName } from './utils'
 
 const defaultMapContextToProps = R.identity
 
-export default (
-  mapContextToProps = defaultMapContextToProps,
-) => WrappedComponent => {
+// eslint-disable-next-line space-in-parens
+export default (mapContextToProps = defaultMapContextToProps, ) => WrappedComponent => {
   const Wrapper = props => (
     <PlacesContext.Consumer>
       {value => <WrappedComponent {...props} {...mapContextToProps(value)} />}
