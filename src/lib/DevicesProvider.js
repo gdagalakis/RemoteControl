@@ -26,12 +26,13 @@ export class DeviceProvider extends Component {
       onDelete: this.deleteHandler,
       onChangeActive: this.onChangeActive,
       onSubmit: this.onDeviceFormSubmit,
+      requestDevices: this.requestDevices,
+      loading: false,
     }
   }
 
   async componentDidMount() {
-    const dev = await readDevices()
-    this.setState({ devices: dev.data })
+    await this.requestDevices()
   }
 
   onDeviceFormSubmit = async item => {
@@ -62,6 +63,19 @@ export class DeviceProvider extends Component {
     const newDevices = R.adjust(toggleActive, deviceFoundIndex, devices)
     this.setState({ devices: newDevices })
     updateDevice(id, newDevices[deviceFoundIndex])
+  }
+
+  requestDevices = async (limit, offset) => {
+    const { devices = [] } = this.state
+    this.setState({ loading: true })
+    const dev = await readDevices({ limit, offset })
+    this.setState({
+      devices: [...devices, ...dev.data],
+      limit: dev.limit,
+      offset: dev.offset,
+      total: dev.total,
+      loading: false,
+    })
   }
 
   deleteHandler = async id => {
