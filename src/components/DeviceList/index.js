@@ -121,17 +121,6 @@ const DeviceList = props => {
             </AutoSizer>
           )}
         </InfiniteLoader>
-
-        {/* {devices.map((item, index) => (
-          <DeviceItem
-            key={item.id}
-            index={index + 1}
-            {...item}
-            onDelete={() => onDelete(item.id)}
-            handleChange={() => onChangeActive(item.id)}
-            saveChanges={onSave(item.id)}
-          />
-        ))} */}
       </DevList>
     </div>
   )
