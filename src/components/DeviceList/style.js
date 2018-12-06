@@ -13,4 +13,5 @@ export const DevListWrapper = styled.div`
 export const DevList = styled.ul`
   padding: 2px;
   list-style-type: none;
+  height: 500px
 `

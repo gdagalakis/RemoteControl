@@ -9,6 +9,11 @@ const mapContextToProps = R.pick([
   'onDelete',
   'onChangeActive',
   'onSave',
+  'requestDevices',
+  'limit',
+  'offset',
+  'total',
+  'loading',
 ])
 
 export default DeviceConsumerHOC(mapContextToProps)(Devices)

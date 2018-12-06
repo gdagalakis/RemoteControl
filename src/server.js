@@ -6,15 +6,16 @@ import { findById } from 'lib/utils'
 
 const { router } = createServer('http://localhost/api')
 
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
+
 const getDevices = async () => {
+  await delay(5000)
   const value = await LS.getItem('devices')
-  console.log(value)
   return value || []
 }
 
 const getPlaces = async () => {
   const value = await LS.getItem('places')
-  console.log(value)
   return value || []
 }
 
@@ -29,20 +30,17 @@ router.post('/places/create', async (req, res) => {
   const places = await getPlaces()
   const updatedPlaces = [...places, newPlace]
   await LS.setItem('places', updatedPlaces)
-  console.log(updatedPlaces)
   res.json(newPlace)
 })
 
 router.get('/devices', async (req, res) => {
   const devices = await getDevices()
-  console.log(devices)
   const limit = req.query.limit || 10
   const offset = req.query.offset || 0
   const reqDevices = R.compose(
     R.take(limit),
     R.drop(offset),
   )(devices)
-  console.log(reqDevices)
   const result = { data: reqDevices, total: devices.length, limit, offset }
   res.json(result)
 })
@@ -53,7 +51,6 @@ router.post('/devices/create', async (req, res) => {
   const devices = await getDevices()
   const updatedDevices = [...devices, newDevice]
   await LS.setItem('devices', updatedDevices)
-  console.log(updatedDevices)
   res.json(newDevice)
 })
 
@@ -67,7 +64,6 @@ router.put('/devices/edit/:id', async (req, res) => {
     devices,
   )
   await LS.setItem('devices', updatedDevices)
-  console.log(updatedDevices)
   res.json(newDevice)
 })
 
@@ -79,6 +75,5 @@ router.delete('/devices/remove/:id', async (req, res) => {
     devices,
   )
   await LS.setItem('devices', updatedDevices)
-  console.log(updatedDevices)
   res.sendStatus(200)
 })

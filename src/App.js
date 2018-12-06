@@ -3,6 +3,8 @@ import { BrowserRouter as Router, Route } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
 import DeviceProvider from 'lib/DevicesProvider'
 import PlacesProvider from 'lib/PlacesProvider'
+import createMockData from 'utils/mockdata'
+import 'normalize.css'
 import DeviceForm from './components/DeviceForm'
 import PlaceForm from './components/PlaceForm'
 import NavBar from './components/NavBar'
@@ -10,8 +12,6 @@ import Devices from './pages/Devices'
 import Page from './components/Page'
 import { GlobalStyle, defaultTheme } from './globalStyle'
 import AppDiv from './style.js'
-import 'normalize.css'
-import createMockData from 'utils/mockdata'
 
 class App extends Component {
   constructor(props) {
