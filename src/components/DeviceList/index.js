@@ -30,14 +30,20 @@ const rowRenderer = (
   offset,
   total,
 ) => {
-  function RowRenderer({ index, key, style }) {
+  function RowRenderer({ index, style, key }) {
     let content
 
     if (!isRowLoaded(devices, limit, offset, total)({ index })) {
-      content = 'Loading...'
+      content = (
+        <div key={key} style={style}>
+          {' '}
+          Loading...{' '}
+        </div>
+      )
     } else {
       content = (
         <DeviceItem
+          style={style}
           key={R.path([index, 'id'], devices)}
           index={index + 1}
           {...devices[index]}
@@ -48,11 +54,7 @@ const rowRenderer = (
       )
     }
 
-    return (
-      <div key={key} style={{ ...style, border: '1px solid black' }}>
-        {content}
-      </div>
-    )
+    return content
   }
   RowRenderer.propTypes = {
     index: P.number,
@@ -74,8 +76,6 @@ const DeviceList = props => {
     total,
     loading,
   } = props
-
-  // eslint-disable-next-line no-param-reassign
 
   const rowCount = hasNextPage(limit, offset, total)
     ? devices.length + 1

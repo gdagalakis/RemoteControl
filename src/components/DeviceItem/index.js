@@ -42,10 +42,10 @@ class DeviceItem extends Component {
   }
 
   render() {
-    const { active, onDelete, handleChange, index } = this.props
+    const { active, onDelete, handleChange, index, style } = this.props
     const { editState, curPlace, curName, curIp, curDescription } = this.state
     return (
-      <Row>
+      <Row style={style}>
         <IdItem>
           <input type="checkbox" onChange={handleChange} checked={active} />
           {index}
@@ -139,5 +139,6 @@ DeviceItem.propTypes = {
   onDelete: P.func,
   handleChange: P.func,
   index: P.number,
+  style: P.object,
 }
 export default DeviceItem

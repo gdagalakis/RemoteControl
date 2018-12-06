@@ -6,7 +6,10 @@ import { findById } from 'lib/utils'
 
 const { router } = createServer('http://localhost/api')
 
+const delay = ms => new Promise(resolve => setTimeout(resolve, ms))
+
 const getDevices = async () => {
+  await delay(5000)
   const value = await LS.getItem('devices')
   return value || []
 }
