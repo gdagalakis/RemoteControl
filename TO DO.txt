@@ -56,3 +56,4 @@ Libraries to add
 
 -replace state with useState hooks
 -replace context with useContext hooks
+-(suspense)
