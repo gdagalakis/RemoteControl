@@ -28,6 +28,7 @@ const createFakeDevice = places => () => {
 }
 
 const createMockData = async () => {
+  console.log('mockdata')
   const mock = await LS.getItem('mock')
   if (mock) return
   const places = R.times(createFakePlace, 10)

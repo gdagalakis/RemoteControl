@@ -51,3 +51,8 @@ Libraries to add
 -react-Router
 -ramda
 -redux
+
+
+
+-replace state with useState hooks
+-replace context with useContext hooks
